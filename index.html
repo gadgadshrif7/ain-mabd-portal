@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة عين معبد الرقمية | الخدمات والإنشغالات المحلية</title>
+    
+    <!-- خط Tajawal العالي الجودة من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة الأيقونات المتجهة عالية الدقة Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 30px -10px rgba(2, 132, 199, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* الهيدر الفاخر */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0284c7 100%);
+            color: #ffffff;
+            padding: 80px 20px 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 50% 20%, rgba(255,255,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            color: #e0f2fe;
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px 80px 20px;
+        }
+
+        /* شريط البحث المطور */
+        .search-wrapper {
+            max-width: 650px;
+            margin: -40px auto 50px auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .search-box {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
+        }
+
+        .search-box i {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            margin-left: 12px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            padding: 12px 0;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            background: transparent;
+        }
+
+        /* لوحة التنبيهات */
+        .notice-card {
+            background: linear-gradient(to left, #fffbe3, #ffffff);
+            border-right: 4px solid var(--accent);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .notice-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .notice-content h4 {
+            font-size: 1.05rem;
+            color: #78350f;
+            margin-bottom: 2px;
+        }
+
+        .notice-content p {
+            color: #a16207;
+            font-size: 0.95rem;
+        }
+
+        /* شبكة الكروت الاحترافية */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(2, 132, 199, 0.3);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* تخصيص كارت الطوارئ الخاص ليظهر بشكل مختلف ومهم */
+        .card.emergency-card {
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: linear-gradient(to bottom, #ffffff, #fff5f5);
+        }
+
+        .card.emergency-card:hover {
+            box-shadow: 0 20px 30px -10px rgba(239, 68, 68, 0.2);
+            border-color: var(--danger);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            background: rgba(2, 132, 199, 0.08);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .card.emergency-card .icon-box {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+        }
+
+        .card:hover .icon-box {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .card.emergency-card:hover .icon-box {
+            background: var(--danger);
+            color: #ffffff;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        /* قائمة أرقام الهواتف داخل الكارت */
+        .phone-list {
+            list-style: none;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .phone-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #ffffff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .phone-item span {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .phone-item a {
+            color: var(--danger);
+            text-decoration: none;
+            font-weight: 800;
+            direction: ltr;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .phone-item a:hover {
+            text-decoration: underline;
+        }
+
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 12px 18px;
+            background: #f1f5f9;
+            color: var(--text-main);
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .card-btn i {
+            font-size: 0.85rem;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover .card-btn {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .card.emergency-card:hover .card-btn {
+            background: var(--danger);
+            color: #ffffff;
+        }
+
+        .card:hover .card-btn i {
+            transform: translateX(-4px);
+        }
+
+        /* الفوتر */
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #1e293b;
+        }
+
+        footer p {
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 60px 20px 80px 20px; }
+            header h1 { font-size: 2rem; }
+            header p { font-size: 1.05rem; }
+            .grid { grid-template-columns: 1fr; }
+            .notice-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="header-content">
+            <div class="badge">
+                <i class="fa-solid fa-location-dot"></i> الجزائر - ولاية الجلفة
+            </div>
+            <h1>بوابة عين معبد الرقمية</h1>
+            <p>منصة موحدة لتسهيل الوصول إلى الخدمات والأرقام والمعلومات المحلية للمواطنين</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- شريط البحث -->
+        <div class="search-wrapper">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="ابحث عن خدمة، صيدلية، إدارات، أو أرقام طوارئ...">
+            </div>
+        </div>
+
+        <!-- شريط التنبيهات -->
+        <div class="notice-card">
+            <div class="notice-icon">
+                <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <div class="notice-content">
+                <h4>مستجدات البلدية</h4>
+                <p>تم تحديث قائمة الصيدليات المناوبة وتفاصيل خدمات الحالة المدنية والأرقام المباشرة للإنقاذ.</p>
+            </div>
+        </div>
+
+        <!-- شبكة البطاقات -->
+        <div class="grid" id="servicesGrid">
+
+            <!-- 1. أرقام الطوارئ والاستغاثة (محدث بالأرقام المطلوبة) -->
+            <div class="card emergency-card">
+    <div>
+        <div class="icon-box">
+            <i class="fa-solid fa-phone-volume"></i>
+        </div>
+        <h3>أرقام الطوارئ والاستغاثة</h3>
+        <p>أرقام الاستجابة السريعة والطوارئ بمدينة عين معبد:</p>
+        
+        <ul class="phone-list">
+            <li class="phone-item">
+                <span>طوارئ عين معبد:</span>
+                <a href="tel:027969355"><i class="fa-solid fa-phone"></i> 027.96.93.55</a>
+            </li>
+            <li class="phone-item">
+                <span>الدرك الوطني (الأخضر):</span>
+                <a href="tel:1055"><i class="fa-solid fa-shield-halved"></i> 1055</a>
+            </li>
+            <li class="phone-item">
+                <span>الحماية المدنية:</span>
+                <a href="tel:14"><i class="fa-solid fa-fire-extinguisher"></i> 14</a>
+            </li>
+            <li class="phone-item">
+                <span>الإسعاف الطبي العام:</span>
+                <a href="tel:115"><i class="fa-solid fa-ambulance"></i> 115</a>
+            </li>
+        </ul>
+    </div>
+    <a href="tel:027969355" class="card-btn">
+        <span>جاري العمل</span>
+        <i class="fa-solid fa-arrow-left"></i>
+    </a>
+</div>
+
+            <!-- 2. الصحة والمناوبات -->
+            <div class="card">
+                <div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <h3>الصحة والمناوبات</h3>
+                    <p>دليل الأطباء بالمدينة، مواعيد مناوبة الصيدليات الليلية، وأرقام المراكز الصحية.</p>
+                </div>
+                <a href="health.html" class="card-btn">
+                    <span>عرض الدليل الصحي</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+            </div>
+
+            <!-- 3. الإدارة والبلدية -->
+            <div class="card">
+                <div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-landmark"></i>
+                    </div>
+                    <h3>الإدارة والحالة المدنية</h3>
+                    <p>دليل استخراج الوثائق الإدارية، مواعيد استقبال المواطنين، والمكاتب التنفيذية.</p>
+                </div>
+                <a href="administration.html" class="card-btn">
+                    <span>تفاصيل</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+            </div>
+
+            <!-- 4. التجارة والدليل المحلي -->
+            <div class="card">
+                <div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <h3>التجارة والحرفيين</h3>
+                    <p>دليل المحلات، أرقام السباكين، الكهربائيين، وأصحاب الحرف والخدمات بصلب المدينة.</p>
+                </div>
+                <a href="#" class="card-btn">
+                    <span>تصفح الدليل المحلي</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+            </div>
+
+            <!-- 5. المستجدات وسوق المدينة -->
+            <div class="card">
+                <div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-newspaper"></i>
+                    </div>
+                    <h3>أخبار وسوق عين معبد</h3>
+                    <p>إعلانات التوظيف المحلية، مبادرات المجتمع المدني، والبيع والشراء المباشر.</p>
+                </div>
+                <a href="#" class="card-btn">
+                    <span>تصفح المستجدات</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer>
+        <p>بوابة عين معبد الرقمية &copy; 2026 — مشروع مجتمعي غير انتفاعي لخدمة الساكنة</p>
+    </footer>
+
+    <!-- سكربت فلترة البحث -->
+    <script>
+        function filterCards() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let text = cards[i].innerText.toLowerCase();
+                if (text.includes(input)) {
+                    cards[i].style.display = "flex";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

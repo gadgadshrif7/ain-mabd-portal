@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإدارة والمؤسسات العمومية | عين معبد</title>
+    
+    <!-- خط Tajawal العالي الجودة -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- مكتبة الأيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --post-yellow: #f59e0b;
+            --post-blue: #0284c7;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        /* 1. البار العلوي المزدوج لرقم البلدية وبريد الجزائر */
+        .top-call-bar {
+            background: linear-gradient(90deg, #0f172a, #0369a1);
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .top-call-bar .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .top-call-bar a {
+            color: #fef08a;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 3px 12px;
+            border-radius: 20px;
+            direction: ltr;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .top-call-bar a:hover {
+            background: #ffffff;
+            color: #0369a1;
+        }
+
+        /* الهيدر */
+        header {
+            background: #ffffff;
+            padding: 40px 20px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .header-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+
+        .back-link:hover {
+            transform: translateX(4px);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* المحتوى الرئيسي */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 30px;
+        }
+
+        /* تصميم كارت خاص ببريد الجزائر مميز بالهوية الإدارية */
+        .section-card.post-card {
+            border-top: 5px solid var(--post-yellow);
+            background: linear-gradient(to bottom, #ffffff, #fffdf5);
+        }
+
+        .section-card h2 {
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 10px;
+        }
+
+        .section-card.post-card h2 {
+            color: #b45309;
+        }
+
+        /* شبكة أوقات وأرقام البريد */
+        .post-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .info-box {
+            background: #ffffff;
+            padding: 18px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-box h4 {
+            color: var(--text-main);
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+
+        .phone-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #0369a1;
+            font-weight: 800;
+            text-decoration: none;
+            direction: ltr;
+            background: #f0f9ff;
+            padding: 6px 14px;
+            border-radius: 8px;
+            border: 1px solid #bae6fd;
+            margin-top: 5px;
+        }
+
+        .phone-badge:hover {
+            background: #0284c7;
+            color: #ffffff;
+        }
+
+        .docs-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .doc-item {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .doc-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        /* الفوتر */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+
+        @media (max-width: 600px) {
+            .top-call-bar { flex-direction: column; gap: 8px; font-size: 0.88rem; }
+            header h1 { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. الشريط العلوي المثبت (يحتوي على هاتفي البلدية والبريد) -->
+    <div class="top-call-bar">
+        <div class="bar-item">
+            <span><i class="fa-solid fa-building-columns"></i> البلدية:</span>
+            <a href="tel:027969355"><i class="fa-solid fa-phone"></i> 027 96 93 55</a>
+        </div>
+        <div class="bar-item">
+            <span><i class="fa-solid fa-envelope-open-text"></i> بريد الجزائر:</span>
+            <a href="tel:027852231"><i class="fa-solid fa-phone"></i> 027 85 22 31</a>
+        </div>
+    </div>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="back-link">
+                <i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية
+            </a>
+            <h1>دليل الإدارة والمؤسسات العمومية</h1>
+            <p>معلومات ومعطيات مكتب بلدية عين معبد ومكتب بريد الجزائر بالمدينة</p>
+        </div>
+    </header>
+
+    <!-- المحتوى -->
+    <div class="container">
+
+        <!-- قسم بريد الجزائر (Algérie Poste) -->
+        <div class="section-card post-card">
+            <h2><i class="fa-solid fa-envelope-open-text"></i> بريد الجزائر (Algérie Poste) - عين معبد</h2>
+            
+            <div class="post-info-grid">
+                <!-- المواعيد -->
+                <div class="info-box">
+                    <h4><i class="fa-regular fa-clock" style="color: #f59e0b;"></i> أوقات العمل الرسمية:</h4>
+                    <p><strong>من السبت إلى الأربعاء:</strong> 08:00 صباحاً — 17:00 مساءً</p>
+                    <p><strong>يوم الخميس:</strong> 08:00 صباحاً — 12:00 زوالاً</p>
+                    <p style="color: #ef4444; font-size: 0.85rem; font-weight: bold; margin-top: 5px;">
+                        * لا توجد فترة مسائية يوم الخميس.
+                    </p>
+                </div>
+
+                <!-- الأرقام -->
+                <div class="info-box">
+                    <h4><i class="fa-solid fa-headset" style="color: #0284c7;"></i> أرقام التواصل:</h4>
+                    <p>المكتب المحلي (عين معبد):</p>
+                    <a href="tel:027852231" class="phone-badge"><i class="fa-solid fa-phone"></i> 027 85 22 31</a>
+                    
+                    <p style="margin-top: 12px;">مركز خدمة الزبائن العام:</p>
+                    <a href="tel:1530" class="phone-badge" style="background: #fef3c7; color: #b45309; border-color: #fde68a;">
+                        <i class="fa-solid fa-phone-volume"></i> 1530
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- قسم البلدية والوثائق -->
+        <div class="section-card">
+            <h2><i class="fa-solid fa-file-contract"></i> البلدية والحالة المدنية</h2>
+            <ul class="docs-list">
+                <li class="doc-item"><i class="fa-solid fa-certificate"></i> بطاقة التعريف الوطنية</li>
+                <li class="doc-item"><i class="fa-solid fa-passport"></i> جواز السفر البيومتري</li>
+                <li class="doc-item"><i class="fa-solid fa-file-invoice"></i> شهادة الميلاد (12 خ)</li>
+                <li class="doc-item"><i class="fa-solid fa-house"></i> شهادة الإقامة</li>
+                <li class="doc-item"><i class="fa-solid fa-ring"></i> عقد الزواج والدفتر العائلي</li>
+                <li class="doc-item"><i class="fa-solid fa-id-card"></i> رخصة السياقة</li>
+            </ul>
+        </div>
+
+        <!-- قسم أوقات استقبال البلدية -->
+        <div class="section-card">
+            <h2><i class="fa-solid fa-building-user"></i> أوقات استقبال البلدية</h2>
+            <p style="color: var(--text-muted); margin-bottom: 10px;">
+                مكاتب الحالة المدنية والإدارة مفتوحة طيلة أيام الأسبوع الإدارية:
+            </p>
+            <p><strong>من الأحد إلى الخميس:</strong> 08:00 صباحاً — 16:30 مساءً</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>بوابة عين معبد الرقمية &copy; 2026 — مصلحة الإعلام والتوثيق</p>
+    </footer>
+
+</body>
+</html>
