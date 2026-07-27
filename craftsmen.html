@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الحرفيين والتجارة | بوابة عين معبد الرقمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #059669;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 50px; }
+        
+        header { background: #0f172a; color: #fff; padding: 30px 20px; text-align: center; }
+        header h1 { font-size: 1.8rem; margin-bottom: 8px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: #a7f3d0; text-decoration: none; margin-bottom: 15px; font-weight: 600; }
+        
+        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+        
+        /* تصفية الحرفيين */
+        .filter-container { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; justify-content: center; }
+        .filter-btn { background: var(--bg-card); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; }
+        .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        
+        /* شبكة الحرفيين */
+        .craftsmen-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+        .craftsman-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
+        .craftsman-card h3 { font-size: 1.2rem; margin-bottom: 5px; }
+        .craftsman-card .job { color: var(--primary); font-weight: 600; font-size: 0.95rem; margin-bottom: 15px; }
+        .phone-btn { display: inline-flex; align-items: center; gap: 8px; background: #10b981; color: #fff; text-decoration: none; width: 100%; justify-content: center; padding: 10px; border-radius: 8px; font-weight: 700; direction: ltr; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div style="max-width:900px; margin:0 auto; text-align:right;">
+            <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية</a>
+        </div>
+        <h1><i class="fa-solid fa-screwdriver-wrench"></i> دليل الحرفيين والتجارة ببلدية عين معبد</h1>
+        <p>قائمة الحرفيين المعتمدين والموثوقين بالمنطقة</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- أزرار التصفية -->
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterCategory('الكل', this)">الجميع</button>
+            <button class="filter-btn" onclick="filterCategory('كهربائي', this)">كهربائي</button>
+            <button class="filter-btn" onclick="filterCategory('سباك', this)">سباك</button>
+            <button class="filter-btn" onclick="filterCategory('ميكانيكي', this)">ميكانيكي</button>
+            <button class="filter-btn" onclick="filterCategory('نقل وبضائع', this)">نقل وبضائع</button>
+        </div>
+
+        <!-- قائمة الحرفيين (تقوم بالإضافة هنا مستقبلاً) -->
+        <div class="craftsmen-grid" id="craftsmenGrid">
+            
+            <div class="craftsman-card" data-cat="كهربائي">
+                <h3>محمد العمري</h3>
+                <div class="job"><i class="fa-solid fa-bolt"></i> كهربائي معتمد</div>
+                <a href="tel:0661000000" class="phone-btn"><i class="fa-solid fa-phone"></i> 0661 00 00 00</a>
+            </div>
+
+            <div class="craftsman-card" data-cat="سباك">
+                <h3>عمر بن سالم</h3>
+                <div class="job"><i class="fa-solid fa-faucet-drip"></i> سباك ورصاص</div>
+                <a href="tel:0555000000" class="phone-btn"><i class="fa-solid fa-phone"></i> 0555 00 00 00</a>
+            </div>
+
+            <div class="craftsman-card" data-cat="نقل وبضائع">
+                <h3>سعيد القاسمي</h3>
+                <div class="job"><i class="fa-solid fa-truck"></i> نقل البضائع والأثاث</div>
+                <a href="tel:0770000000" class="phone-btn"><i class="fa-solid fa-phone"></i> 0770 00 00 00</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function filterCategory(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const cards = document.querySelectorAll('.craftsman-card');
+            cards.forEach(card => {
+                if(category === 'الكل' || card.getAttribute('data-cat') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
