@@ -6,6 +6,10 @@
     <title>دليل الحرفيين والتجارة | بوابة عين معبد الرقمية</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- مكتبة PapaParse لقراءة ملفات جوجل شيت بسرعة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+
     <style>
         :root {
             --primary: #059669;
@@ -24,7 +28,7 @@
         
         .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
         
-        /* تصفية الحرفيين */
+        /* أزرار التصفية */
         .filter-container { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; justify-content: center; }
         .filter-btn { background: var(--bg-card); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; }
         .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
@@ -35,6 +39,9 @@
         .craftsman-card h3 { font-size: 1.2rem; margin-bottom: 5px; }
         .craftsman-card .job { color: var(--primary); font-weight: 600; font-size: 0.95rem; margin-bottom: 15px; }
         .phone-btn { display: inline-flex; align-items: center; gap: 8px; background: #10b981; color: #fff; text-decoration: none; width: 100%; justify-content: center; padding: 10px; border-radius: 8px; font-weight: 700; direction: ltr; }
+
+        /* حالة التحميل */
+        .loading-box { grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted); font-size: 1.1rem; }
     </style>
 </head>
 <body>
@@ -58,53 +65,89 @@
             <button class="filter-btn" onclick="filterCategory('نقل وبضائع', this)">نقل وبضائع</button>
         </div>
 
-        <!-- قائمة الحرفيين (تقوم بالإضافة هنا مستقبلاً) -->
+        <!-- شبكة عرض الحرفيين الديناميكية -->
         <div class="craftsmen-grid" id="craftsmenGrid">
-
-                    <!-- رسالة تظهر عندما تكون القائمة فارغة -->
-            <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; background: var(--bg-card); border-radius: 12px; border: 1px dashed var(--border-color);">
-                <i class="fa-solid fa-user-clock" style="font-size: 3rem; color: var(--primary); margin-bottom: 15px;"></i>
-                <h3 style="font-size: 1.2rem; margin-bottom: 8px;">الدليل قيد التحديث والاستقبال</h3>
-                <p style="color: var(--text-muted); font-size: 0.95rem;">لم يتم إضافة حرفيين في هذا القسم بعد. إذا كنت صاحب حرفة في عين معبد يمكنك التسجيل الآن عبر الصفحة الرئيسية ليتم إدراجك.</p>
+            <div class="loading-box">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
+                <p>جاري تحميل قائمة الحرفيين من الدليل...</p>
             </div>
-        
-        </div>
-            
-            <!--<div class="craftsman-card" data-cat="كهربائي">
-                <h3>محمد العمري</h3>
-                <div class="job"><i class="fa-solid fa-bolt"></i> كهربائي معتمد</div>
-                <a href="tel:0661000000" class="phone-btn"><i class="fa-solid fa-phone"></i> 0661 00 00 00</a>
-            </div>
-
-            <div class="craftsman-card" data-cat="سباك">
-                <h3>عمر بن سالم</h3>
-                <div class="job"><i class="fa-solid fa-faucet-drip"></i> سباك ورصاص</div>
-                <a href="tel:0555000000" class="phone-btn"><i class="fa-solid fa-phone"></i> 0555 00 00 00</a>
-            </div>
-
-            <div class="craftsman-card" data-cat="نقل وبضائع">
-                <h3>سعيد القاسمي</h3>
-                <div class="job"><i class="fa-solid fa-truck"></i> نقل البضائع والأثاث</div>
-                <a href="tel:0770000000" class="phone-btn"><i class="fa-solid fa-phone"></i> 0770 00 00 00</a>
-            </div>
-
         </div>
     </div>
-    -->
-    <script>
-        function filterCategory(category, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
 
-            const cards = document.querySelectorAll('.craftsman-card');
-            cards.forEach(card => {
-                if(category === 'الكل' || card.getAttribute('data-cat') === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
+    <script>
+        // 🔗 ضع رابط CSV الصادر من Google Sheets هنا
+        const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRchz9T1JAKofws_7S2CsM3Kp1k6OaQnrYTfziRK9FWr0gGClVgJT1XuKvlS65fuBJkfxs_pVL-mC3Z/pub?output=csv';
+
+        let allCraftsmen = [];
+
+        // جلب البيانات تلقائياً من Google Sheets
+        function loadCraftsmenData() {
+            Papa.parse(sheetCsvUrl, {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    allCraftsmen = results.data;
+                    renderCraftsmen('الكل');
+                },
+                error: function(err) {
+                    document.getElementById('craftsmenGrid').innerHTML = `
+                        <div class="loading-box">
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; font-size: 2rem;"></i>
+                            <p>تعذر تحميل بيانات الدليل حالياً، يرجى المحاولة لاحقاً.</p>
+                        </div>
+                    `;
                 }
             });
         }
+
+        // عرض بطاقات الحرفيين بناءً على التصنيف
+        function renderCraftsmen(selectedCategory) {
+            const grid = document.getElementById('craftsmenGrid');
+            grid.innerHTML = '';
+
+            const filteredData = allCraftsmen.filter(item => {
+                if (!item.الاسم || !item.المهنة) return false;
+                if (selectedCategory === 'الكل') return true;
+                return item.المهنة.trim() === selectedCategory.trim();
+            });
+
+            if (filteredData.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; background: var(--bg-card); border-radius: 12px; border: 1px dashed var(--border-color);">
+                        <i class="fa-solid fa-user-clock" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <h3 style="font-size: 1.1rem; margin-bottom: 8px;">لا يوجد حرفيون حالياً في هذا القسم</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">يمكنك التسجيل في الدليل من الصفحة الرئيسية ليتم إدراجك.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredData.forEach(item => {
+                const name = item.الاسم || 'غير محدد';
+                const job = item.المهنة || 'حرفي';
+                const phone = item.الهاتف || '';
+
+                const card = document.createElement('div');
+                card.className = 'craftsman-card';
+                card.innerHTML = `
+                    <h3>${name}</h3>
+                    <div class="job"><i class="fa-solid fa-screwdriver-wrench"></i> ${job}</div>
+                    <a href="tel:${phone}" class="phone-btn"><i class="fa-solid fa-phone"></i> ${phone}</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // تصفية الفئات
+        function filterCategory(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderCraftsmen(category);
+        }
+
+        // تشغيل الجلب عند فتح الصفحة
+        loadCraftsmenData();
     </script>
 </body>
 </html>
