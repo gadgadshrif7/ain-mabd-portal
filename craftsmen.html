@@ -13,41 +13,106 @@
     <style>
         :root {
             --primary: #059669;
+            --primary-hover: #047857;
             --bg-body: #f8fafc;
             --bg-card: #ffffff;
             --text-main: #0f172a;
             --text-muted: #64748b;
             --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
+
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
         body { background-color: var(--bg-body); color: var(--text-main); padding-bottom: 50px; }
         
-        header { background: #0f172a; color: #fff; padding: 30px 20px; text-align: center; }
-        header h1 { font-size: 1.8rem; margin-bottom: 8px; }
-        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: #a7f3d0; text-decoration: none; margin-bottom: 15px; font-weight: 600; }
+        header { background: #0f172a; color: #fff; padding: 35px 20px; text-align: center; }
+        header h1 { font-size: 1.8rem; margin-bottom: 8px; font-weight: 800; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: #a7f3d0; text-decoration: none; margin-bottom: 15px; font-weight: 600; transition: 0.2s; }
+        .back-btn:hover { color: #fff; }
         
-        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
+        .container { max-width: 950px; margin: 30px auto; padding: 0 20px; }
         
-        /* أزرار التصفية */
-        .filter-container { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px; justify-content: center; }
-        .filter-btn { background: var(--bg-card); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; }
-        .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        /* أزرار التصفية الفاخرة */
+        .filter-container { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; justify-content: center; }
+        .filter-btn { 
+            background: var(--bg-card); 
+            border: 1px solid var(--border-color); 
+            padding: 9px 18px; 
+            border-radius: 25px; 
+            cursor: pointer; 
+            font-weight: 700; 
+            font-size: 0.95rem;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); shadow: var(--shadow); }
         
-        /* شبكة الحرفيين */
-        .craftsmen-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
-        .craftsman-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); }
-        .craftsman-card h3 { font-size: 1.2rem; margin-bottom: 5px; }
-        .craftsman-card .job { color: var(--primary); font-weight: 600; font-size: 0.95rem; margin-bottom: 15px; }
-        .phone-btn { display: inline-flex; align-items: center; gap: 8px; background: #10b981; color: #fff; text-decoration: none; width: 100%; justify-content: center; padding: 10px; border-radius: 8px; font-weight: 700; direction: ltr; }
+        /* شبكة بطاقات الحرفيين بتنسيقها الأصلي */
+        .craftsmen-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 22px; }
+        
+        .craftsman-card { 
+            background: var(--bg-card); 
+            border: 1px solid var(--border-color); 
+            border-radius: 16px; 
+            padding: 24px 20px; 
+            text-align: center; 
+            box-shadow: var(--shadow);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .craftsman-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: var(--shadow-hover); 
+            border-color: #cbd5e1;
+        }
 
-        /* حالة التحميل */
-        .loading-box { grid-column: 1 / -1; text-align: center; padding: 40px; color: var(--text-muted); font-size: 1.1rem; }
+        .craftsman-card .avatar-icon {
+            width: 55px;
+            height: 55px;
+            background: #ecfdf5;
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 15px auto;
+        }
+
+        .craftsman-card h3 { font-size: 1.25rem; margin-bottom: 6px; font-weight: 800; color: var(--text-main); }
+        .craftsman-card .job { color: var(--primary); font-weight: 700; font-size: 0.95rem; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 6px; }
+        
+        .phone-btn { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 10px; 
+            background: var(--primary); 
+            color: #fff; 
+            text-decoration: none; 
+            width: 100%; 
+            justify-content: center; 
+            padding: 12px; 
+            border-radius: 10px; 
+            font-weight: 800; 
+            font-size: 1.05rem;
+            direction: ltr; 
+            transition: background 0.2s;
+        }
+        .phone-btn:hover { background: var(--primary-hover); }
+
+        /* صندوق التحميل والرسائل الفارغة */
+        .status-box { grid-column: 1 / -1; text-align: center; padding: 50px 20px; background: var(--bg-card); border-radius: 16px; border: 1px dashed var(--border-color); }
     </style>
 </head>
 <body>
 
     <header>
-        <div style="max-width:900px; margin:0 auto; text-align:right;">
+        <div style="max-width:950px; margin:0 auto; text-align:right;">
             <a href="index.html" class="back-btn"><i class="fa-solid fa-arrow-right"></i> العودة للصفحة الرئيسية</a>
         </div>
         <h1><i class="fa-solid fa-screwdriver-wrench"></i> دليل الحرفيين والتجارة ببلدية عين معبد</h1>
@@ -65,11 +130,11 @@
             <button class="filter-btn" onclick="filterCategory('نقل وبضائع', this)">نقل وبضائع</button>
         </div>
 
-        <!-- شبكة عرض الحرفيين الديناميكية -->
+        <!-- شبكة عرض الحرفيين -->
         <div class="craftsmen-grid" id="craftsmenGrid">
-            <div class="loading-box">
-                <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary); margin-bottom: 10px;"></i>
-                <p>جاري تحميل قائمة الحرفيين من الدليل...</p>
+            <div class="status-box">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 2.2rem; color: var(--primary); margin-bottom: 12px;"></i>
+                <p style="color: var(--text-muted); font-weight: 600;">جاري تحميل قائمة الحرفيين من الدليل...</p>
             </div>
         </div>
     </div>
@@ -79,6 +144,15 @@
         const sheetCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRchz9T1JAKofws_7S2CsM3Kp1k6OaQnrYTfziRK9FWr0gGClVgJT1XuKvlS65fuBJkfxs_pVL-mC3Z/pub?output=csv';
 
         let allCraftsmen = [];
+
+        // تحديد الأيقونة المناسبة حسب المهنة
+        function getJobIcon(job) {
+            if (job.includes('كهرباء') || job.includes('كهربائي')) return 'fa-bolt';
+            if (job.includes('سباك') || job.includes('رصاص')) return 'fa-faucet-drip';
+            if (job.includes('ميكانيكي') || job.includes('سيارات')) return 'fa-wrench';
+            if (job.includes('نقل') || job.includes('بضائع')) return 'fa-truck-ramps';
+            return 'fa-screwdriver-wrench';
+        }
 
         // جلب البيانات تلقائياً من Google Sheets
         function loadCraftsmenData() {
@@ -92,16 +166,16 @@
                 },
                 error: function(err) {
                     document.getElementById('craftsmenGrid').innerHTML = `
-                        <div class="loading-box">
-                            <i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; font-size: 2rem;"></i>
-                            <p>تعذر تحميل بيانات الدليل حالياً، يرجى المحاولة لاحقاً.</p>
+                        <div class="status-box">
+                            <i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; font-size: 2.5rem; margin-bottom: 10px;"></i>
+                            <p style="color: var(--text-muted); font-weight: 600;">تعذر تحميل بيانات الدليل حالياً، يرجى المحاولة لاحقاً.</p>
                         </div>
                     `;
                 }
             });
         }
 
-        // عرض بطاقات الحرفيين بناءً على التصنيف
+        // عرض بطاقات الحرفيين بالتنسيق القديم الجميل
         function renderCraftsmen(selectedCategory) {
             const grid = document.getElementById('craftsmenGrid');
             grid.innerHTML = '';
@@ -114,10 +188,10 @@
 
             if (filteredData.length === 0) {
                 grid.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; background: var(--bg-card); border-radius: 12px; border: 1px dashed var(--border-color);">
-                        <i class="fa-solid fa-user-clock" style="font-size: 2.5rem; color: var(--primary); margin-bottom: 15px;"></i>
-                        <h3 style="font-size: 1.1rem; margin-bottom: 8px;">لا يوجد حرفيون حالياً في هذا القسم</h3>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">يمكنك التسجيل في الدليل من الصفحة الرئيسية ليتم إدراجك.</p>
+                    <div class="status-box">
+                        <i class="fa-solid fa-user-clock" style="font-size: 2.8rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <h3 style="font-size: 1.2rem; margin-bottom: 8px;">لا يوجد حرفيون حالياً في هذا القسم</h3>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">يمكنك التسجيل في الدليل من الصفحة الرئيسية ليتم إدراجك.</p>
                     </div>
                 `;
                 return;
@@ -127,12 +201,21 @@
                 const name = item.الاسم || 'غير محدد';
                 const job = item.المهنة || 'حرفي';
                 const phone = item.الهاتف || '';
+                const iconClass = getJobIcon(job);
 
                 const card = document.createElement('div');
                 card.className = 'craftsman-card';
                 card.innerHTML = `
-                    <h3>${name}</h3>
-                    <div class="job"><i class="fa-solid fa-screwdriver-wrench"></i> ${job}</div>
+                    <div>
+                        <div class="avatar-icon">
+                            <i class="fa-solid ${iconClass}"></i>
+                        </div>
+                        <h3>${name}</h3>
+                        <div class="job">
+                            <i class="fa-solid ${iconClass}"></i>
+                            <span>${job}</span>
+                        </div>
+                    </div>
                     <a href="tel:${phone}" class="phone-btn"><i class="fa-solid fa-phone"></i> ${phone}</a>
                 `;
                 grid.appendChild(card);
