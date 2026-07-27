@@ -8,6 +8,37 @@
     <meta name="keywords" content="عين معبد, بلدية عين معبد, مواقيت الصلاة عين معبد, طقس عين معبد, أخبار عين معبد, صيدلية المناوبة, الجلفة">
     <meta name="robots" content="index, follow">
     <meta name="google-site-verification" content="8SNxCqX3jS_0mJJGMsBIPLWCduNYBlRPCt-w9fB-XTs" />
+    <link rel="canonical" href="https://ain-maabed.github.io/index.html">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ain-maabed.github.io/">
+    <meta property="og:title" content="بوابة عين معبد الرقمية | الخدمات والإنشغالات المحلية">
+    <meta property="og:description" content="البوابة الرسمية والخدماتية لمدينة عين معبد. دليل الصحة، مواقيت الصلاة، الطقس، أرقام الطوارئ، والدليل المحلي.">
+    <meta property="og:locale" content="ar_DZ">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="بوابة عين معبد الرقمية | الخدمات والإنشغالات المحلية">
+    <meta name="twitter:description" content="البوابة الرسمية والخدماتية لمدينة عين معبد. دليل الصحة، مواقيت الصلاة، الطقس، أرقام الطوارئ، والدليل المحلي.">
+
+    <!-- Google Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "GovernmentOrganization",
+      "name": "بوابة عين معبد الرقمية",
+      "url": "https://ain-maabed.github.io/",
+      "description": "منصة موحدة لتسهيل الوصول إلى الخدمات والأرقام والمعلومات المحلية لمدينة عين معبد ولاية الجلفة.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "عين معبد",
+        "addressRegion": "الجلفة",
+        "addressCountry": "DZ"
+      },
+      "telephone": "+21327969355"
+    }
+    </script>
     
     <!-- أيقونة الموقع الشاملة (المبنى البلدي) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
@@ -658,70 +689,70 @@
         </div>
     </div>
 
-                <!-- نافذة تسجيل الحرفيين -->
-                        <!-- النافذة المنبثقة الشاملة للحرفيين -->
-            <div class="modal" id="craftsmanModal">
-                <div class="modal-content">
-                    <span class="close-modal" onclick="closeModal()">&times;</span>
-                    
-                    <!-- الخيار 1: اختيار الإجراء (تصفح أم تسجيل) -->
-                    <div id="craftsmenChoiceView">
-                        <h3 style="margin-bottom: 10px; text-align: center;"><i class="fa-solid fa-screwdriver-wrench"></i> دليل الحرفيين والتجارة</h3>
-                        <p style="font-size:0.9rem; color:var(--text-muted); text-align: center; margin-bottom: 25px;">اختر الخدمة التي تريدها من خيارات دليل البلدية:</p>
-                        
-                        <div style="display: flex; flex-direction: column; gap: 12px;">
-                            <a href="craftsmen.html" class="submit-btn" style="text-align: center; text-decoration: none; background: var(--primary);">
-                                <i class="fa-solid fa-users-viewfinder"></i> تصفح قائمة الحرفيين بالبلدية
-                            </a>
-                            <button type="button" onclick="showRegisterForm()" class="submit-btn" style="background: var(--topbar-bg); border: 1px solid var(--border-color);">
-                                <i class="fa-solid fa-user-plus"></i> تسجل كحرفي جديد في الدليل
-                            </button>
-                        </div>
-                    </div>
+    <!-- نافذة تسجيل الحرفيين -->
+    <!-- النافذة المنبثقة الشاملة للحرفيين -->
+    <div class="modal" id="craftsmanModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
             
-                    <!-- الخيار 2: استمارة التسجيل (تظهر عند الضغط على تسجيل) -->
-                    <div id="modalFormContainer" style="display: none;">
-                        <button type="button" onclick="showChoiceView()" style="background: none; border: none; color: var(--primary); cursor: pointer; font-weight: 700; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 5px;">
-                            <i class="fa-solid fa-arrow-right"></i> للرجوع للخيارات
-                        </button>
-                        <h3 style="margin-bottom: 10px;"><i class="fa-solid fa-user-plus"></i> إضافة حرفي إلى الدليل</h3>
-                        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom: 15px;">أدخل معلوماتك ليتم مراجعتها وإضافتها لدليل البلدية الرقمي:</p>
-                        
-                        <form id="craftsmanForm" onsubmit="handleFormSubmit(event)">
-                            <div class="form-group">
-                                <label>الاسم واللقب:</label>
-                                <input type="text" name="الاسم واللقب" required placeholder="مثال: محمد العمري">
-                            </div>
-                            <div class="form-group">
-                                <label>المهنة / النشاط:</label>
-                                <select name="المهنة" required>
-                                    <option value="">اختر المهنة...</option>
-                                    <option value="كهربائي">كهربائي</option>
-                                    <option value="سباك">سباك (رصاص)</option>
-                                    <option value="ميكانيكي">ميكانيكي / تصليح سيارات</option>
-                                    <option value="نقل وبضائع">صاحب سيارة نقل / كلونديستان</option>
-                                    <option value="بناء وحرف أخرى">بناء / حرفي آخر</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>رقم الهاتف:</label>
-                                <input type="tel" name="رقم الهاتف" required placeholder="06XXXXXXXX" dir="ltr">
-                            </div>
-                            <button type="submit" class="submit-btn" id="submitBtn">إرسال للمراجعة</button>
-                        </form>
-                    </div>
-            
-                    <!-- رسالة النجاح الكبيرة والتأكيدية -->
-                    <div id="successMessage" style="display: none; text-align: center; padding: 20px 10px;">
-                        <i class="fa-solid fa-circle-check" style="font-size: 4rem; color: var(--primary); margin-bottom: 15px;"></i>
-                        <h2 style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 10px; font-weight: 800;">تم إرسال طلبك بنجاح!</h2>
-                        <p style="font-size: 1rem; color: var(--text-muted); line-height: 1.8;">
-                            شكراً لك، تم استلام معلوماتك وسيتم مراجعتها من طرف المشرفين وإدراجك في الدليل خلال <strong>24 ساعة</strong>.
-                        </p>
-                    </div>
-            
+            <!-- الخيار 1: اختيار الإجراء (تصفح أم تسجيل) -->
+            <div id="craftsmenChoiceView">
+                <h3 style="margin-bottom: 10px; text-align: center;"><i class="fa-solid fa-screwdriver-wrench"></i> دليل الحرفيين والتجارة</h3>
+                <p style="font-size:0.9rem; color:var(--text-muted); text-align: center; margin-bottom: 25px;">اختر الخدمة التي تريدها من خيارات دليل البلدية:</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <a href="craftsmen.html" class="submit-btn" style="text-align: center; text-decoration: none; background: var(--primary);">
+                        <i class="fa-solid fa-users-viewfinder"></i> تصفح قائمة الحرفيين بالبلدية
+                    </a>
+                    <button type="button" onclick="showRegisterForm()" class="submit-btn" style="background: var(--topbar-bg); border: 1px solid var(--border-color);">
+                        <i class="fa-solid fa-user-plus"></i> تسجل كحرفي جديد في الدليل
+                    </button>
                 </div>
             </div>
+    
+            <!-- الخيار 2: استمارة التسجيل (تظهر عند الضغط على تسجيل) -->
+            <div id="modalFormContainer" style="display: none;">
+                <button type="button" onclick="showChoiceView()" style="background: none; border: none; color: var(--primary); cursor: pointer; font-weight: 700; margin-bottom: 10px; display: inline-flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-arrow-right"></i> للرجوع للخيارات
+                </button>
+                <h3 style="margin-bottom: 10px;"><i class="fa-solid fa-user-plus"></i> إضافة حرفي إلى الدليل</h3>
+                <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom: 15px;">أدخل معلوماتك ليتم مراجعتها وإضافتها لدليل البلدية الرقمي:</p>
+                
+                <form id="craftsmanForm" onsubmit="handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label>الاسم واللقب:</label>
+                        <input type="text" name="الاسم واللقب" required placeholder="مثال: محمد العمري">
+                    </div>
+                    <div class="form-group">
+                        <label>المهنة / النشاط:</label>
+                        <select name="المهنة" required>
+                            <option value="">اختر المهنة...</option>
+                            <option value="كهربائي">كهربائي</option>
+                            <option value="سباك">سباك (رصاص)</option>
+                            <option value="ميكانيكي">ميكانيكي / تصليح سيارات</option>
+                            <option value="نقل وبضائع">صاحب سيارة نقل / كلونديستان</option>
+                            <option value="بناء وحرف أخرى">بناء / حرفي آخر</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>رقم الهاتف:</label>
+                        <input type="tel" name="رقم الهاتف" required placeholder="06XXXXXXXX" dir="ltr">
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">إرسال للمراجعة</button>
+                </form>
+            </div>
+    
+            <!-- رسالة النجاح الكبيرة والتأكيدية -->
+            <div id="successMessage" style="display: none; text-align: center; padding: 20px 10px;">
+                <i class="fa-solid fa-circle-check" style="font-size: 4rem; color: var(--primary); margin-bottom: 15px;"></i>
+                <h2 style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 10px; font-weight: 800;">تم إرسال طلبك بنجاح!</h2>
+                <p style="font-size: 1rem; color: var(--text-muted); line-height: 1.8;">
+                    شكراً لك، تم استلام معلوماتك وسيتم مراجعتها من طرف المشرفين وإدراجك في الدليل خلال <strong>24 ساعة</strong>.
+                </p>
+            </div>
+    
+        </div>
+    </div>
     <!-- الفوتر -->
     <footer>
         <p>بوابة عين معبد الرقمية &copy; 2026 — مشروع مجتمعي غير انتفاعي لخدمة الساكنة</p>
