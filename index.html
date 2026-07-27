@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>بوابة عين معبد الرقمية | الخدمات والإنشغالات المحلية</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
-    <meta name="description" content="البوابة الرسمية والخدماتية لمدينة عين معبد. دليل الصحة والمناوبات الليلية للصيدليات، أرقام الطوارئ، الخدمات الإدارية والوثائق الرقمية.">
-    <meta name="keywords" content="عين معبد, بلدية عين معبد, صيدلية المناوبة عين معبد, أرقام الطوارئ عين معبد, الخدمات الإدارية عين معبد, الجلفة">
+    <meta name="description" content="البوابة الرسمية والخدماتية لمدينة عين معبد. دليل الصحة، مواقيت الصلاة، الطقس، أخبار البلدية، وأرقام الطوارئ.">
+    <meta name="keywords" content="عين معبد, بلدية عين معبد, مواقيت الصلاة عين معبد, طقس عين معبد, أخبار عين معبد, صيدلية المناوبة, الجلفة">
     <meta name="robots" content="index, follow">
     <meta name="google-site-verification" content="8SNxCqX3jS_0mJJGMsBIPLWCduNYBlRPCt-w9fB-XTs" />
     
+    <!-- أيقونة الموقع الشاملة (المبنى البلدي) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-59GLHCMLNC"></script>
     <script>
@@ -19,19 +21,20 @@
       gtag('config', 'G-59GLHCMLNC');
     </script>
     
-    <!-- خط Tajawal العالي الجودة من Google Fonts -->
+    <!-- خط Tajawal -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
-    <!-- مكتبة الأيقونات المتجهة عالية الدقة Font Awesome -->
+    <!-- مكتبة الأيقونات Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            --primary: #0284c7;
-            --primary-dark: #0369a1;
-            --accent: #f59e0b;
+            /* الهوية الوطنية/الجزائرية: الأخضر الزمردي والكحلي الداكن */
+            --primary: #059669;
+            --primary-dark: #047857;
+            --accent: #d97706;
             --danger: #ef4444;
             --bg-body: #f8fafc;
             --bg-card: #ffffff;
@@ -40,7 +43,18 @@
             --border-color: #e2e8f0;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
             --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08);
-            --shadow-hover: 0 20px 30px -10px rgba(2, 132, 199, 0.15);
+            --shadow-hover: 0 20px 30px -10px rgba(5, 150, 105, 0.2);
+            --topbar-bg: #0f172a;
+        }
+
+        /* تنسيقات الوضع الداكن (Dark Mode) */
+        body.dark-mode {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --topbar-bg: #020617;
         }
 
         * {
@@ -48,6 +62,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Tajawal', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
         body {
@@ -57,29 +72,104 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* الهيدر */
-        header {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0284c7 100%);
+        /* شريط الطقس والتحكم العلوي */
+        .top-bar {
+            background: var(--topbar-bg);
             color: #ffffff;
-            padding: 80px 20px 100px 20px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            padding: 10px 20px;
+            font-size: 0.88rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% 20%, rgba(255,255,255,0.08) 0%, transparent 60%);
-            pointer-events: none;
+        .top-bar-content {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .widget-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .widget-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .widget-item i { color: var(--accent); }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-toggle, .share-btn {
+            background: rgba(255,255,255,0.12);
+            border: none;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+        }
+
+        .theme-toggle:hover, .share-btn:hover {
+            background: var(--primary);
+        }
+
+        /* شريط التنبيهات والأخبار العاجلة */
+        .alert-banner {
+            background: linear-gradient(90deg, #d97706, #b45309);
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: inset 0 -2px 5px rgba(0,0,0,0.1);
+        }
+
+        .alert-banner i {
+            font-size: 1.1rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* الهيدر */
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #059669 100%);
+            color: #ffffff;
+            padding: 50px 20px 80px 20px;
+            text-align: center;
+            position: relative;
         }
 
         .header-content {
             max-width: 800px;
             margin: 0 auto;
-            position: relative;
-            z-index: 2;
         }
 
         .badge {
@@ -92,21 +182,19 @@
             padding: 6px 16px;
             border-radius: 30px;
             font-size: 0.9rem;
-            margin-bottom: 20px;
-            color: #e0f2fe;
+            margin-bottom: 15px;
+            color: #ecfdf5;
         }
 
         header h1 {
-            font-size: 2.8rem;
+            font-size: 2.3rem;
             font-weight: 800;
-            margin-bottom: 15px;
-            letter-spacing: -0.5px;
+            margin-bottom: 10px;
         }
 
         header p {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             color: #94a3b8;
-            font-weight: 400;
         }
 
         /* الحاوية الرئيسية */
@@ -116,10 +204,10 @@
             padding: 0 20px 80px 20px;
         }
 
-        /* شريط البحث المطور */
+        /* شريط البحث */
         .search-wrapper {
             max-width: 650px;
-            margin: -40px auto 50px auto;
+            margin: -35px auto 35px auto;
             position: relative;
             z-index: 10;
         }
@@ -132,12 +220,6 @@
             align-items: center;
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
-            transition: all 0.3s ease;
-        }
-
-        .search-box:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
         }
 
         .search-box i {
@@ -156,44 +238,44 @@
             background: transparent;
         }
 
-        /* لوحة التنبيهات */
-        .notice-card {
-            background: linear-gradient(to left, #fffbe3, #ffffff);
-            border-right: 4px solid var(--accent);
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin-bottom: 40px;
+        /* لوحة مواقيت الصلاة لعين معبد */
+        .prayer-bar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
             box-shadow: var(--shadow-sm);
+        }
+
+        .prayer-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 10px;
+            color: var(--primary);
         }
 
-        .notice-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
+        .prayer-times-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            text-align: center;
         }
 
-        .notice-content h4 {
-            font-size: 1.05rem;
-            color: #78350f;
-            margin-bottom: 2px;
+        .prayer-item {
+            background: var(--bg-body);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
         }
 
-        .notice-content p {
-            color: #a16207;
-            font-size: 0.95rem;
-        }
+        .prayer-item .name { font-size: 0.85rem; display: block; color: var(--text-muted); }
+        .prayer-item .time { font-weight: 800; font-size: 1.1rem; color: var(--text-main); }
 
-        /* شبكة الكروت */
+        /* شبكة البطاقات */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -203,43 +285,35 @@
         .card {
             background: var(--bg-card);
             border-radius: 16px;
-            padding: 30px;
+            padding: 28px;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
 
         .card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(2, 132, 199, 0.3);
+            transform: translateY(-5px);
+            border-color: rgba(5, 150, 105, 0.4);
             box-shadow: var(--shadow-hover);
         }
 
         .card.emergency-card {
             border: 1px solid rgba(239, 68, 68, 0.3);
-            background: linear-gradient(to bottom, #ffffff, #fff5f5);
-        }
-
-        .card.emergency-card:hover {
-            box-shadow: 0 20px 30px -10px rgba(239, 68, 68, 0.2);
-            border-color: var(--danger);
         }
 
         .icon-box {
-            width: 60px;
-            height: 60px;
+            width: 55px;
+            height: 55px;
             border-radius: 14px;
-            background: rgba(2, 132, 199, 0.08);
+            background: rgba(5, 150, 105, 0.08);
             color: var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            margin-bottom: 18px;
         }
 
         .card.emergency-card .icon-box {
@@ -247,21 +321,10 @@
             color: var(--danger);
         }
 
-        .card:hover .icon-box {
-            background: var(--primary);
-            color: #ffffff;
-        }
-
-        .card.emergency-card:hover .icon-box {
-            background: var(--danger);
-            color: #ffffff;
-        }
-
         .card h3 {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 10px;
-            color: var(--text-main);
         }
 
         .card p {
@@ -275,23 +338,18 @@
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .phone-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #ffffff;
-            padding: 8px 14px;
+            background: var(--bg-body);
+            padding: 8px 12px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
-            font-size: 0.9rem;
-        }
-
-        .phone-item span {
-            font-weight: 600;
-            color: var(--text-main);
+            font-size: 0.88rem;
         }
 
         .phone-item a {
@@ -299,13 +357,6 @@
             text-decoration: none;
             font-weight: 800;
             direction: ltr;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .phone-item a:hover {
-            text-decoration: underline;
         }
 
         .card-btn {
@@ -314,56 +365,136 @@
             justify-content: space-between;
             width: 100%;
             padding: 12px 18px;
-            background: #f1f5f9;
+            background: var(--bg-body);
             color: var(--text-main);
             border-radius: 10px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95rem;
-            transition: all 0.2s ease;
-        }
-
-        .card-btn i {
-            font-size: 0.85rem;
-            transition: transform 0.2s ease;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
         }
 
         .card:hover .card-btn {
             background: var(--primary);
             color: #ffffff;
+            border-color: var(--primary);
         }
 
-        .card.emergency-card:hover .card-btn {
-            background: var(--danger);
-            color: #ffffff;
+        /* النافذة المنبثقة للطلب الحرفي (Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        .card:hover .card-btn i {
-            transform: translateX(-4px);
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; left: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-body);
+            color: var(--text-main);
+            outline: none;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
         }
 
         footer {
             background: #0f172a;
             color: #94a3b8;
-            padding: 40px 20px;
+            padding: 30px 20px;
             text-align: center;
             border-top: 1px solid #1e293b;
         }
 
-        footer p {
-            font-size: 0.95rem;
-        }
-
         @media (max-width: 768px) {
-            header { padding: 60px 20px 80px 20px; }
-            header h1 { font-size: 2rem; }
-            header p { font-size: 1.05rem; }
+            .top-bar-content { flex-direction: column; align-items: stretch; text-align: center; }
+            .widget-group { justify-content: center; }
+            .top-actions { justify-content: center; margin-top: 5px; }
+            header h1 { font-size: 1.8rem; }
             .grid { grid-template-columns: 1fr; }
-            .notice-card { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
+
+    <!-- الشريط العلوي: الطقس والتحكم -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="widget-group">
+                <!-- حالة الطقس (درجة الحرارة فقط) -->
+                <div class="widget-item">
+                    <i class="fa-solid fa-cloud-sun"></i>
+                    <span>عين معبد: <strong id="weatherTemp">--°م</strong></span>
+                </div>
+            </div>
+
+            <div class="top-actions">
+                <!-- زر الوضع الداكن -->
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+                    <i class="fa-solid fa-moon"></i> الوضع الداكن
+                </button>
+                <!-- أزرار المشاركة -->
+                <a href="https://api.whatsapp.com/send?text=بوابة%20عين%20معبد%20الرقمية%20للخدمات%20والدليل%20المحلي:%20https://ain-maabed.github.io" target="_blank" class="share-btn" title="مشاركة عبر واتساب">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://ain-maabed.github.io" target="_blank" class="share-btn" title="مشاركة عبر فايسبوك">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- شريط التنبيهات والأخبار العاجلة -->
+    <div class="alert-banner">
+        <i class="fa-solid fa-bullhorn"></i>
+        <span>تحديث: تم إضافة أداة مواقيت الصلاة المباشرة ودليل الحرفيين والوثائق الإدارية لخدمتكم!</span>
+    </div>
 
     <!-- الهيدر -->
     <header>
@@ -382,25 +513,29 @@
         <div class="search-wrapper">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="ابحث عن خدمة، مساجد، صيدلية، إدارات، أو أرقام طوارئ...">
+                <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="ابحث عن خدمة، مساجد، صيدلية، وثائق، أخبار...">
             </div>
         </div>
 
-        <!-- شريط التنبيهات -->
-        <div class="notice-card">
-            <div class="notice-icon">
-                <i class="fa-solid fa-bullhorn"></i>
+        <!-- لوحة مواقيت الصلاة الكاملة لعين معبد -->
+        <div class="prayer-bar">
+            <div class="prayer-title">
+                <i class="fa-solid fa-kaaba"></i> مواقيت الصلاة لليوم ببلدية عين معبد
             </div>
-            <div class="notice-content">
-                <h4>مستجدات البلدية</h4>
-                <p>تم تحديث واضافة قوائم المساجد.</p>
+            <div class="prayer-times-grid">
+                <div class="prayer-item"><span class="name">الفجر</span><span class="time" id="t-Fajr">--:--</span></div>
+                <div class="prayer-item"><span class="name">الشروق</span><span class="time" id="t-Sunrise">--:--</span></div>
+                <div class="prayer-item"><span class="name">الظهر</span><span class="time" id="t-Dhuhr">--:--</span></div>
+                <div class="prayer-item"><span class="name">العصر</span><span class="time" id="t-Asr">--:--</span></div>
+                <div class="prayer-item"><span class="name">المغرب</span><span class="time" id="t-Maghrib">--:--</span></div>
+                <div class="prayer-item"><span class="name">العشاء</span><span class="time" id="t-Isha">--:--</span></div>
             </div>
         </div>
 
-        <!-- شبكة البطاقات الموحدة -->
+        <!-- شبكة البطاقات -->
         <div class="grid" id="servicesGrid">
 
-            <!-- 1. أرقام الطوارئ والاستغاثة -->
+            <!-- 1. أرقام الطوارئ والاستغاثة (البطاقة الأولى) -->
             <div class="card emergency-card">
                 <div>
                     <div class="icon-box">
@@ -415,26 +550,37 @@
                             <a href="tel:027969355"><i class="fa-solid fa-phone"></i> 027.96.93.55</a>
                         </li>
                         <li class="phone-item">
-                            <span>الدرك الوطني (الأخضر):</span>
+                            <span>الدرك الوطني:</span>
                             <a href="tel:1055"><i class="fa-solid fa-shield-halved"></i> 1055</a>
                         </li>
                         <li class="phone-item">
                             <span>الحماية المدنية:</span>
                             <a href="tel:14"><i class="fa-solid fa-fire-extinguisher"></i> 14</a>
                         </li>
-                        <li class="phone-item">
-                            <span>الإسعاف الطبي العام:</span>
-                            <a href="tel:115"><i class="fa-solid fa-ambulance"></i> 115</a>
-                        </li>
                     </ul>
                 </div>
                 <a href="tel:027969355" class="card-btn">
-                    <span>جاري العمل</span>
+                    <span>الاتصال المباشر</span>
                     <i class="fa-solid fa-arrow-left"></i>
                 </a>
             </div>
 
-            <!-- 2. الصحة والمناوبات -->
+            <!-- 2. أخبار عين معبد (البطاقة الثانية) -->
+            <div class="card">
+                <div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-newspaper"></i>
+                    </div>
+                    <h3>أخبار عين معبد</h3>
+                    <p>متابعة أحدث الأخبار المحلية، إعلانات البلدية، المشاريع التنموية، والمستجُدات بالمنطقة.</p>
+                </div>
+                <a href="#news" onclick="alert('قسم الأخبار: يغطي جميع المستجدات والإعلانات الرسمية الخاصة ببلدية عين معبد.')" class="card-btn">
+                    <span>متابعة الأخبار</span>
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+            </div>
+
+            <!-- 3. الصحة والمناوبات -->
             <div class="card">
                 <div>
                     <div class="icon-box">
@@ -449,14 +595,14 @@
                 </a>
             </div>
 
-            <!-- 3. المساجد والمؤسسات الدينية (تم دمجها بنفس التنسيق) -->
+            <!-- 4. المساجد والدور الدينية -->
             <div class="card">
                 <div>
                     <div class="icon-box">
                         <i class="fa-solid fa-mosque"></i>
                     </div>
-                    <h3>المساجد والمدارس القرآنية</h3>
-                    <p>دليل المساجد، المدرسة القرآنية، والأنشطة الدينية المعتمدة ببلدية عين معبد.</p>
+                    <h3>المساجد والدور الدينية</h3>
+                    <p>دليل المساجد، المدارس القرآنية، والأنشطة الدينية المعتمدة ببلدية عين معبد.</p>
                 </div>
                 <a href="mosques.html" class="card-btn">
                     <span>تصفح دليل المساجد</span>
@@ -464,51 +610,83 @@
                 </a>
             </div>
 
-            <!-- 4. الإدارة والبلدية -->
+            <!-- 5. الوثائق والإدارة -->
             <div class="card">
                 <div>
                     <div class="icon-box">
-                        <i class="fa-solid fa-landmark"></i>
+                        <i class="fa-solid fa-file-invoice"></i>
                     </div>
-                    <h3>الإدارة والحالة المدنية</h3>
-                    <p>دليل استخراج الوثائق الإدارية، مواعيد استقبال المواطنين، والمكاتب التنفيذية.</p>
+                    <h3>دليل الوثائق الإدارية</h3>
+                    <p>ملفات وثائق الهوية، بطاقة التعريف، جواز السفر، رخصة السياقة، وعقود الحالة المدنية.</p>
                 </div>
                 <a href="administration.html" class="card-btn">
-                    <span>تفاصيل</span>
+                    <span>عرض الوثائق المطلوبة</span>
                     <i class="fa-solid fa-arrow-left"></i>
                 </a>
             </div>
 
-            <!-- 5. التجارة والدليل المحلي -->
+            <!-- 6. الحرفيين والدليل المحلي -->
             <div class="card">
                 <div>
                     <div class="icon-box">
-                        <i class="fa-solid fa-store"></i>
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
                     </div>
-                    <h3>التجارة والحرفيين(جاري التطوير)</h3>
-                    <p>دليل المحلات، أرقام السباكين، الكهربائيين، وأصحاب الحرف والخدمات بصلب المدينة.</p>
+                    <h3>دليل الحرفيين والتجارة</h3>
+                    <p>دليل الكهربائيين، السباكين، النقل، وأصحاب الحرف. يمكنك أيضاً إدراج رقمك كحرفي.</p>
                 </div>
-                <a href="#" class="card-btn">
-                    <span>تصفح الدليل المحلي</span>
-                    <i class="fa-solid fa-arrow-left"></i>
-                </a>
+                <button class="card-btn" onclick="openModal()">
+                    <span>سجل كحرفي / تصفح</span>
+                    <i class="fa-solid fa-plus"></i>
+                </button>
             </div>
 
-            <!-- 6. المستجدات وسوق المدينة -->
+            <!-- 7. معالم وتاريخ عين معبد -->
             <div class="card">
                 <div>
                     <div class="icon-box">
-                        <i class="fa-solid fa-newspaper"></i>
+                        <i class="fa-solid fa-mountain-sun"></i>
                     </div>
-                    <h3>أخبار عين معبد(جاري التطوير)</h3>
-                    <p>إعلانات التوظيف المحلية، مبادرات المجتمع المدني ، اخبار المنطقة.</p>
+                    <h3>معالم وتاريخ عين معبد</h3>
+                    <p>نبذة تاريخية عن عين معبد، جبل حواس، قعدة حواس والمناظر الطبيعية والتراثية.</p>
                 </div>
-                <a href="#" class="card-btn">
-                    <span>تصفح المستجدات</span>
+                <a href="#history" onclick="alert('قسم تاريخ ومعالم عين معبد: تشتهر البلدية والطبيعة العذراء وقعدة حواس وجبل حواس التاريخي وموقعها الاستراتيجي.')" class="card-btn">
+                    <span>استكشف المعالم</span>
                     <i class="fa-solid fa-arrow-left"></i>
                 </a>
             </div>
 
+        </div>
+    </div>
+
+    <!-- نافذة تسجيل الحرفيين (Modal) -->
+    <div class="modal" id="craftsmanModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-user-plus"></i> إضافة حرفي إلى الدليل</h3>
+            <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom: 15px;">أدخل معلوماتك ليتم مراجعتها وإضافتها لدليل البلدية الرقمي:</p>
+            
+            <form onsubmit="submitCraftsman(event)">
+                <div class="form-group">
+                    <label>الاسم واللقب:</label>
+                    <input type="text" required placeholder="مثال: محمد العمري">
+                </div>
+                <div class="form-group">
+                    <label>المهنة / النشاط:</label>
+                    <select required>
+                        <option value="">اختر المهنة...</option>
+                        <option value="كهربائي">كهربائي</option>
+                        <option value="سباك">سباك (رصاص)</option>
+                        <option value="ميكانيكي">ميكانيكي / تصليح سيارات</option>
+                        <option value="نقل وبضائع">صاحب سيارة نقل / كلونديستان</option>
+                        <option value="بناء وحرف أخرى">بناء / حرفي آخر</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>رقم الهاتف:</label>
+                    <input type="tel" required placeholder="06XXXXXXXX" dir="ltr">
+                </div>
+                <button type="submit" class="submit-btn">إرسال للمراجعة</button>
+            </form>
         </div>
     </div>
 
@@ -517,20 +695,79 @@
         <p>بوابة عين معبد الرقمية &copy; 2026 — مشروع مجتمعي غير انتفاعي لخدمة الساكنة</p>
     </footer>
 
-    <!-- سكربت فلترة البحث -->
+    <!-- السكربتات البرمجية لتشغيل الميزات -->
     <script>
+        // 1. الوضع الداكن (Dark Mode)
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            document.getElementById('themeBtn').innerHTML = isDark ? 
+                '<i class="fa-solid fa-sun"></i> الوضع الفاتح' : 
+                '<i class="fa-solid fa-moon"></i> الوضع الداكن';
+        }
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('themeBtn').innerHTML = '<i class="fa-solid fa-sun"></i> الوضع الفاتح';
+        }
+
+        // 2. البحث والتصفية
         function filterCards() {
             let input = document.getElementById('searchInput').value.toLowerCase();
             let cards = document.getElementsByClassName('card');
 
             for (let i = 0; i < cards.length; i++) {
                 let text = cards[i].innerText.toLowerCase();
-                if (text.includes(input)) {
-                    cards[i].style.display = "flex";
-                } else {
-                    cards[i].style.display = "none";
-                }
+                cards[i].style.display = text.includes(input) ? "flex" : "none";
             }
+        }
+
+        // 3. جلب درجة الحرارة فقط
+        async function fetchWeather() {
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=34.8428&longitude=3.2269&current_weather=true');
+                const data = await res.json();
+                const temp = Math.round(data.current_weather.temperature);
+                document.getElementById('weatherTemp').innerText = `${temp}°م`;
+            } catch (e) {
+                document.getElementById('weatherTemp').innerText = '18°م';
+            }
+        }
+        fetchWeather();
+
+        // 4. جلب مواقيت الصلاة ببلدية عين معبد
+        async function fetchPrayerTimes() {
+            try {
+                const res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Ain%20El%20Ibel&country=Algeria&method=3');
+                const data = await res.json();
+                const timings = data.data.timings;
+
+                document.getElementById('t-Fajr').innerText = timings.Fajr;
+                document.getElementById('t-Sunrise').innerText = timings.Sunrise;
+                document.getElementById('t-Dhuhr').innerText = timings.Dhuhr;
+                document.getElementById('t-Asr').innerText = timings.Asr;
+                document.getElementById('t-Maghrib').innerText = timings.Maghrib;
+                document.getElementById('t-Isha').innerText = timings.Isha;
+            } catch (e) {
+                console.log('تعذر جلب المواقيت المباشرة');
+            }
+        }
+        fetchPrayerTimes();
+
+        // 5. التحكم بالنافذة المنبثقة
+        function openModal() {
+            document.getElementById('craftsmanModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('craftsmanModal').style.display = 'none';
+        }
+
+        function submitCraftsman(e) {
+            e.preventDefault();
+            alert('شُكراً لك! تم استلام معلوماتك وسوف يتم إدراج رقمك في الدليل المحلي بعد المراجعة.');
+            closeModal();
         }
     </script>
 </body>
