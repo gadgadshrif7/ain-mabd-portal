@@ -658,38 +658,51 @@
         </div>
     </div>
 
-    <!-- نافذة تسجيل الحرفيين (Modal) -->
-    <div class="modal" id="craftsmanModal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal()">&times;</span>
-        <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-user-plus"></i> إضافة حرفي إلى الدليل</h3>
-        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom: 15px;">أدخل معلوماتك ليتم مراجعتها وإضافتها لدليل البلدية الرقمي:</p>
-        
-        <!-- ضع الرابط الخاص بك هنا في مكان action -->
-        <form action="https://formspree.io/f/xjgnjljb" method="POST">
-            <div class="form-group">
-                <label>الاسم واللقب:</label>
-                <input type="text" name="الاسم واللقب" required placeholder="مثال: محمد العمري">
+                <!-- نافذة تسجيل الحرفيين -->
+            <div class="modal" id="craftsmanModal">
+                <div class="modal-content">
+                    <span class="close-modal" onclick="closeModal()">&times;</span>
+                    
+                    <!-- استمارة الإدخال -->
+                    <div id="modalFormContainer">
+                        <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-user-plus"></i> إضافة حرفي إلى الدليل</h3>
+                        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom: 15px;">أدخل معلوماتك ليتم مراجعتها وإضافتها لدليل البلدية الرقمي:</p>
+                        
+                        <form id="craftsmanForm" onsubmit="handleFormSubmit(event)">
+                            <div class="form-group">
+                                <label>الاسم واللقب:</label>
+                                <input type="text" name="الاسم واللقب" required placeholder="مثال: محمد العمري">
+                            </div>
+                            <div class="form-group">
+                                <label>المهنة / النشاط:</label>
+                                <select name="المهنة" required>
+                                    <option value="">اختر المهنة...</option>
+                                    <option value="كهربائي">كهربائي</option>
+                                    <option value="سباك">سباك (رصاص)</option>
+                                    <option value="ميكانيكي">ميكانيكي / تصليح سيارات</option>
+                                    <option value="نقل وبضائع">صاحب سيارة نقل / كلونديستان</option>
+                                    <option value="بناء وحرف أخرى">بناء / حرفي آخر</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>رقم الهاتف:</label>
+                                <input type="tel" name="رقم الهاتف" required placeholder="06XXXXXXXX" dir="ltr">
+                            </div>
+                            <button type="submit" class="submit-btn" id="submitBtn">إرسال للمراجعة</button>
+                        </form>
+                    </div>
+            
+                    <!-- رسالة النجاح الكبيرة والتأكيدية (تظهر بعد الإرسال) -->
+                    <div id="successMessage" style="display: none; text-align: center; padding: 20px 10px;">
+                        <i class="fa-solid fa-circle-check" style="font-size: 4rem; color: var(--primary); margin-bottom: 15px;"></i>
+                        <h2 style="font-size: 1.5rem; color: var(--text-main); margin-bottom: 10px; font-weight: 800;">تم إرسال طلبك بنجاح!</h2>
+                        <p style="font-size: 1.05rem; color: var(--text-muted); line-height: 1.8;">
+                            شكراً لك، تم استلام معلوماتك وسيتم مراجعتها من طرف المشرفين وإدراجك في الدليل خلال <strong>24 ساعة</strong>.
+                        </p>
+                    </div>
+            
+                </div>
             </div>
-            <div class="form-group">
-                <label>المهنة / النشاط:</label>
-                <select name="المهنة" required>
-                    <option value="">اختر المهنة...</option>
-                    <option value="كهربائي">كهربائي</option>
-                    <option value="سباك">سباك (رصاص)</option>
-                    <option value="ميكانيكي">ميكانيكي / تصليح سيارات</option>
-                    <option value="نقل وبضائع">صاحب سيارة نقل / كلونديستان</option>
-                    <option value="بناء وحرف أخرى">بناء / حرفي آخر</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>رقم الهاتف:</label>
-                <input type="tel" name="رقم الهاتف" required placeholder="06XXXXXXXX" dir="ltr">
-            </div>
-            <button type="submit" class="submit-btn">إرسال للمراجعة</button>
-        </form>
-    </div>
-</div>
 
     <!-- الفوتر -->
     <footer>
@@ -764,6 +777,60 @@
         function closeModal() {
             document.getElementById('craftsmanModal').style.display = 'none';
         }
+
+        // التحكم بإرسال استمارة الحرفيين عبر الخلفية (AJAX)
+async function handleFormSubmit(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const btn = document.getElementById('submitBtn');
+    const formContainer = document.getElementById('modalFormContainer');
+    const successMsg = document.getElementById('successMessage');
+
+    // رابط Formspree الخاص بك
+    const formspreeEndpoint = "https://formspree.io/f/xjgnjljb"; 
+
+    // تغيير نص الزر أثناء الإرسال
+    btn.disabled = true;
+    btn.innerText = "جاري الإرسال...";
+
+    try {
+        const response = await fetch(formspreeEndpoint, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            // إخفاء الاستمارة وإظهار الرسالة التأكيدية الكبيرة
+            formContainer.style.display = 'none';
+            successMsg.style.display = 'block';
+            form.reset();
+
+            // إغلاق النافذة المنبثقة تلقائياً بعد 4 ثوانٍ وإعادة ضبطها
+            setTimeout(() => {
+                closeModal();
+                setTimeout(() => {
+                    formContainer.style.display = 'block';
+                    successMsg.style.display = 'none';
+                    btn.disabled = false;
+                    btn.innerText = "إرسال للمراجعة";
+                }, 500);
+            }, 4000);
+
+        } else {
+            alert('حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى.');
+            btn.disabled = false;
+            btn.innerText = "إرسال للمراجعة";
+        }
+    } catch (error) {
+        alert('يرجى التحقق من الاتصال بالإنترنت والمحاولة مجدداً.');
+        btn.disabled = false;
+        btn.innerText = "إرسال للمراجعة";
+    }
+}
 
     </script>
 </body>
