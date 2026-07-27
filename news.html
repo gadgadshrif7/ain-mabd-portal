@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أخبار البلدية - عين معبد</title>
-    <!-- استدعاء خط Cairo الأنيق والمتناسق مع المواقع العربية الحديثة -->
+    <!-- خط Cairo المميز -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #0056b3;   /* اللون الرئيسي للموقع */
-            --secondary-color: #2c3e50; /* لون العناوين والنصوص المغلقة */
+            --primary-color: #0056b3;   /* اللون الرئيسي */
+            --secondary-color: #2c3e50; /* لون النصوص الرئيسية */
             --bg-color: #f8f9fa;        /* خلفية الصفحة */
             --card-bg: #ffffff;         /* خلفية البطاقات */
-            --text-color: #4a5568;      /* لون النصوص العامة */
-            --text-light: #718096;     /* لون التواريخ والتفاصيل الفرعية */
+            --text-color: #4a5568;      /* لون النص */
+            --text-light: #718096;     /* لون النصوص الثانوية */
         }
 
         * {
@@ -28,13 +28,60 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            padding: 20px 10px;
+            padding-top: 80px; /* مساحة فارغة حتى لا يغطي شريط التنقل على المحتوى */
         }
 
+        /* --- شريط التنقل العلوي (Navbar) --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        /* --- حاوي الصفحة --- */
         .container {
             max-width: 1100px;
             margin: 0 auto;
-            padding: 10px;
+            padding: 20px 15px;
         }
 
         .page-header {
@@ -44,26 +91,26 @@
 
         .page-header h1 {
             color: var(--secondary-color);
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
             position: relative;
             display: inline-block;
             padding-bottom: 10px;
         }
 
-        /* خط ديكوري تحت العنوان الرئيسي */
         .page-header h1::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 50px;
             height: 4px;
             background-color: var(--primary-color);
             border-radius: 2px;
         }
 
+        /* --- شبكة الأخبار --- */
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -97,11 +144,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover img {
-            transform: scale(1.03);
         }
 
         .card-body {
@@ -115,23 +157,19 @@
             font-size: 0.85rem;
             color: var(--text-light);
             margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
 
         .card-title {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             color: var(--secondary-color);
             margin-bottom: 12px;
             font-weight: 700;
-            line-height: 1.4;
         }
 
         .card-text {
             color: var(--text-color);
             font-size: 0.95rem;
-            white-space: pre-line; /* للحفاظ على التنسيق والسطور الجديدة من Google Sheets */
+            white-space: pre-line;
         }
 
         .status-msg {
@@ -141,10 +179,65 @@
             padding: 40px 0;
             grid-column: 1 / -1;
         }
+
+        /* --- زر العودة إلى الأعلى (Back to Top) --- */
+        .back-to-top {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            width: 45px;
+            height: 45px;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none; /* مخفي افتراضياً ويظهر عند التمرير */
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            background-color: #004085;
+        }
+
+        /* تجاوب الشريط مع الشاشات الصغيرة */
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-links {
+                gap: 15px;
+                font-size: 0.85rem;
+            }
+            body {
+                padding-top: 110px;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">عين معبد</a>
+            <ul class="nav-links">
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="news.html" class="active">الأخبار</a></li>
+                <li><a href="services.html">الخدمات</a></li>
+                <li><a href="contact.html">اتصل بنا</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- محتوى الصفحة -->
     <div class="container">
         <header class="page-header">
             <h1>آخر أخبار البلدية</h1>
@@ -155,10 +248,14 @@
         </main>
     </div>
 
+    <!-- زر العودة للأعلى -->
+    <button id="backToTopBtn" class="back-to-top" title="العودة للأعلى">↑</button>
+
     <script>
-        // ضع رابط الـ API الخاص بك هنا
+        // ضع رابط SheetDB الخاص بك هنا
         const API_URL = 'https://sheetdb.io/api/v1/fju62pmutif0z';
 
+        // 1. جلب الأخبار من Google Sheets
         async function fetchNews() {
             const newsContainer = document.getElementById('news-container');
             
@@ -173,7 +270,6 @@
                     return;
                 }
 
-                // عرض الأخبار من الأحدث إلى الأقدم
                 data.reverse().forEach(item => {
                     const hasImage = item.image && item.image.trim() !== '';
                     
@@ -200,6 +296,24 @@
         }
 
         fetchNews();
+
+        // 2. التحكم في إظهار وسلوك زر "العودة للأعلى"
+        const backToTopBtn = document.getElementById('backToTopBtn');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.style.display = "flex";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        };
+
+        backToTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     </script>
 </body>
 </html>
