@@ -660,35 +660,36 @@
 
     <!-- نافذة تسجيل الحرفيين (Modal) -->
     <div class="modal" id="craftsmanModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-user-plus"></i> إضافة حرفي إلى الدليل</h3>
-            <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom: 15px;">أدخل معلوماتك ليتم مراجعتها وإضافتها لدليل البلدية الرقمي:</p>
-            
-            <form onsubmit="submitCraftsman(event)">
-                <div class="form-group">
-                    <label>الاسم واللقب:</label>
-                    <input type="text" required placeholder="مثال: محمد العمري">
-                </div>
-                <div class="form-group">
-                    <label>المهنة / النشاط:</label>
-                    <select required>
-                        <option value="">اختر المهنة...</option>
-                        <option value="كهربائي">كهربائي</option>
-                        <option value="سباك">سباك (رصاص)</option>
-                        <option value="ميكانيكي">ميكانيكي / تصليح سيارات</option>
-                        <option value="نقل وبضائع">صاحب سيارة نقل / كلونديستان</option>
-                        <option value="بناء وحرف أخرى">بناء / حرفي آخر</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>رقم الهاتف:</label>
-                    <input type="tel" required placeholder="06XXXXXXXX" dir="ltr">
-                </div>
-                <button type="submit" class="submit-btn">إرسال للمراجعة</button>
-            </form>
-        </div>
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <h3 style="margin-bottom: 15px;"><i class="fa-solid fa-user-plus"></i> إضافة حرفي إلى الدليل</h3>
+        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom: 15px;">أدخل معلوماتك ليتم مراجعتها وإضافتها لدليل البلدية الرقمي:</p>
+        
+        <!-- ضع الرابط الخاص بك هنا في مكان action -->
+        <form action="https://formspree.io/f/xjgnjljb" method="POST">
+            <div class="form-group">
+                <label>الاسم واللقب:</label>
+                <input type="text" name="الاسم واللقب" required placeholder="مثال: محمد العمري">
+            </div>
+            <div class="form-group">
+                <label>المهنة / النشاط:</label>
+                <select name="المهنة" required>
+                    <option value="">اختر المهنة...</option>
+                    <option value="كهربائي">كهربائي</option>
+                    <option value="سباك">سباك (رصاص)</option>
+                    <option value="ميكانيكي">ميكانيكي / تصليح سيارات</option>
+                    <option value="نقل وبضائع">صاحب سيارة نقل / كلونديستان</option>
+                    <option value="بناء وحرف أخرى">بناء / حرفي آخر</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>رقم الهاتف:</label>
+                <input type="tel" name="رقم الهاتف" required placeholder="06XXXXXXXX" dir="ltr">
+            </div>
+            <button type="submit" class="submit-btn">إرسال للمراجعة</button>
+        </form>
     </div>
+</div>
 
     <!-- الفوتر -->
     <footer>
@@ -764,11 +765,6 @@
             document.getElementById('craftsmanModal').style.display = 'none';
         }
 
-        function submitCraftsman(e) {
-            e.preventDefault();
-            alert('شُكراً لك! تم استلام معلوماتك وسوف يتم إدراج رقمك في الدليل المحلي بعد المراجعة.');
-            closeModal();
-        }
     </script>
 </body>
 </html>
