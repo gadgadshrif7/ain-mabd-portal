@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المساجد والمدارس القرآنية | بوابة عين معبد الرقمية</title>
+    <meta name="description" content="دليل المساجد والمدارس القرآنية والمرافق الدينية ببلدية عين معبد، الجلفة.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px -5px rgba(0,0,0,0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.7;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0284c7 100%);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .back-nav {
+            margin-bottom: 25px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            background: #ffffff;
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .mosque-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .mosque-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(2, 132, 199, 0.3);
+        }
+
+        .mosque-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .mosque-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(2, 132, 199, 0.1);
+            color: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        .mosque-header h3 {
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+
+        .mosque-details {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .mosque-details li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mosque-details i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><i class="fa-solid fa-mosque"></i> المساجد والمدارس القرآنية</h1>
+        <p>دليل المساجد والمعدات الدينية المعتمدة ببلدية عين معبد</p>
+    </header>
+
+    <div class="container">
+        <div class="back-nav">
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-right"></i> العودة للرئيسية
+            </a>
+        </div>
+
+        <div class="grid">
+            <!-- 1. المسجد العتيق -->
+            <div class="mosque-card">
+                <div class="mosque-header">
+                    <div class="mosque-icon"><i class="fa-solid fa-kaaba"></i></div>
+                    <h3>المسجد العتيق</h3>
+                </div>
+                <ul class="mosque-details">
+                    <li><i class="fa-solid fa-location-dot"></i> الموقع: وسط البلدية (حي وسط المدينة)</li>
+                    <li><i class="fa-solid fa-book-quran"></i> الملحقات: مدرسة قرآنية لتعليم الناشئة</li>
+                    <li><i class="fa-solid fa-clock"></i> تقام فيه: صلاة الجمعة والصلوات الخمس</li>
+                </ul>
+            </div>
+
+            <!-- 2. مسجد النصر -->
+            <div class="mosque-card">
+                <div class="mosque-header">
+                    <div class="mosque-icon"><i class="fa-solid fa-mosque"></i></div>
+                    <h3>مسجد النصر</h3>
+                </div>
+                <ul class="mosque-details">
+                    <li><i class="fa-solid fa-location-dot"></i> الموقع: عين معبد</li>
+                    <li><i class="fa-solid fa-book-quran"></i> الملحقات: قسم للتعليم القرآني</li>
+                    <li><i class="fa-solid fa-clock"></i> تقام فيه: صلاة الجمعة والصلوات الخمس</li>
+                </ul>
+            </div>
+
+            <!-- 3. مصلى حي السلام -->
+            <div class="mosque-card">
+                <div class="mosque-header">
+                    <div class="mosque-icon"><i class="fa-solid fa-place-of-worship"></i></div>
+                    <h3>مصلى حي السلام</h3>
+                </div>
+                <ul class="mosque-details">
+                    <li><i class="fa-solid fa-location-dot"></i> الموقع: حي السلام</li>
+                    <li><i class="fa-solid fa-book-quran"></i> الملحقات: دروس وحلقات قرآنية</li>
+                    <li><i class="fa-solid fa-clock"></i> تقام فيه: الصلوات الخمس</li>
+                </ul>
+            </div>
+
+            <!-- 4. المدرسة القرآنية -->
+            <div class="mosque-card">
+                <div class="mosque-header">
+                    <div class="mosque-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h3>المدرسة القرآنية النمودجية</h3>
+                </div>
+                <ul class="mosque-details">
+                    <li><i class="fa-solid fa-location-dot"></i> الموقع: بلدية عين معبد</li>
+                    <li><i class="fa-solid fa-child"></i> الفئات: الأطفال والشباب والنساء</li>
+                    <li><i class="fa-solid fa-star"></i> النشاط: حفظ القرآن الكريم والأحاديث النبوية</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>بوابة عين معبد الرقمية &copy; 2026 — دليل المساجد والكتاتيب القرآنية</p>
+    </footer>
+
+</body>
+</html>
