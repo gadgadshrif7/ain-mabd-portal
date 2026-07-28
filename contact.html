@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تواصل مع المطور - عين معبد</title>
+    <title>تواصل معنا - عين معبد</title>
     <!-- خط Cairo المميز -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     
@@ -31,7 +31,7 @@
             padding-top: 80px;
         }
 
-        /* --- شريط التنقل العلوي --- */
+        /* --- شريط التنقل العلوي البسيط --- */
         .navbar {
             position: fixed;
             top: 0;
@@ -79,14 +79,14 @@
 
         /* --- محتوى الصفحة --- */
         .container {
-            max-width: 1100px;
+            max-width: 800px; /* العرض مناسب وموحد للنماذج */
             margin: 0 auto;
             padding: 20px 15px;
         }
 
         .page-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .page-header h1 {
@@ -110,13 +110,13 @@
             border-radius: 2px;
         }
 
-        /* --- شبكة المحتوى --- */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+        .page-header p {
+            color: var(--text-light);
+            margin-top: 10px;
+            font-size: 0.95rem;
         }
 
+        /* --- بطاقة النموذج --- */
         .card {
             background: var(--card-bg);
             border-radius: 12px;
@@ -125,59 +125,6 @@
             border: 1px solid #edf2f7;
         }
 
-        .card h2 {
-            color: var(--secondary-color);
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #edf2f7;
-            padding-bottom: 10px;
-        }
-
-        /* معلومات المطور */
-        .developer-intro {
-            font-size: 0.95rem;
-            color: var(--text-color);
-            margin-bottom: 25px;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .info-icon {
-            font-size: 1.3rem;
-            background-color: #f0f7ff;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            color: var(--primary-color);
-            flex-shrink: 0;
-        }
-
-        .info-content h3 {
-            font-size: 0.95rem;
-            color: var(--secondary-color);
-            margin-bottom: 2px;
-        }
-
-        .info-content a,
-        .info-content p {
-            font-size: 0.95rem;
-            color: var(--text-color);
-            text-decoration: none;
-        }
-
-        .info-content a:hover {
-            color: var(--primary-color);
-        }
-
-        /* نموذج التواصل */
         .form-group {
             margin-bottom: 20px;
         }
@@ -191,6 +138,7 @@
         }
 
         .form-group input,
+        .form-group select,
         .form-group textarea {
             width: 100%;
             padding: 12px;
@@ -198,10 +146,12 @@
             border-radius: 8px;
             font-family: inherit;
             font-size: 0.95rem;
+            background-color: #fff;
             transition: border-color 0.3s ease;
         }
 
         .form-group input:focus,
+        .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-color);
@@ -223,6 +173,29 @@
 
         .submit-btn:hover {
             background-color: #004085;
+        }
+
+        /* رسالة الحالة */
+        .status-message {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            text-align: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .status-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
 
         /* زر العودة للأعلى */
@@ -251,11 +224,7 @@
             background-color: #004085;
         }
 
-        /* تجاوب الشاشة للموبايل */
-        @media (max-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 600px) {
             .nav-container {
                 flex-direction: column;
                 gap: 10px;
@@ -266,6 +235,9 @@
             }
             body {
                 padding-top: 110px;
+            }
+            .card {
+                padding: 20px;
             }
         }
     </style>
@@ -288,80 +260,42 @@
     <!-- المحتوى الرئيسي -->
     <div class="container">
         <header class="page-header">
-            <h1>التواصل والدعم الفني</h1>
+            <h1>إرسال انشغال أو اقتراح</h1>
+            <p>يسعدنا استقبال آرائكم وملاحظاتكم لتطوير وتحديث منصة عين معبد</p>
         </header>
 
-        <div class="contact-grid">
-            
-            <!-- بطاقة معلومات مطور المنصة -->
-            <div class="card">
-                <h2>حول المنصة والمطور</h2>
-                <p class="developer-intro">
-                    تم تطوير وتصميم هذه المنصة بشكل مستقل بهدف خدمة سكان زوار مدينة <strong>عين معبد</strong> وتسهيل الوصول إلى المعلومات والخدمات المحلية.
-                </p>
-                
-                <div class="info-item">
-                    <div class="info-icon">💻</div>
-                    <div class="info-content">
-                        <h3>تطوير وإدارة الموقع</h3>
-                        <p>مطور موقع عين معبد</p>
-                    </div>
+        <div class="card">
+            <!-- استمارة الإرسال المربوطة بـ Formspree -->
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">الاسم الكامل</label>
+                    <input type="text" id="name" name="name" placeholder="أدخل اسمك الكريم" required>
                 </div>
 
-                <div class="info-item">
-                    <div class="info-icon">✉️</div>
-                    <div class="info-content">
-                        <h3>البريد الإلكتروني للتقنيات</h3>
-                        <a href="mailto:your-email@example.com">ضع بريدك هنا@example.com</a>
-                    </div>
+                <div class="form-group">
+                    <label for="contact_info">البريد الإلكتروني أو رقم الهاتف</label>
+                    <input type="text" id="contact_info" name="contact_info" placeholder="لتتمكن إدارة المنصة من التواصل معك" required>
                 </div>
 
-                <div class="info-item">
-                    <div class="info-icon">📱</div>
-                    <div class="info-content">
-                        <h3>رقم الهاتف / واتساب</h3>
-                        <p>06XX XX XX XX</p>
-                    </div>
+                <div class="form-group">
+                    <label for="type">نوع الرسالة</label>
+                    <select id="type" name="type" required>
+                        <option value="اقتراح">اقتراح لتطوير الموقع</option>
+                        <option value="بلاغ تقني">الإبلاغ عن خلل في الموقع</option>
+                        <option value="إضافة محتوى">طلب إضافة معلومات أو خدمات</option>
+                        <option value="عام">استفسار عام</option>
+                    </select>
                 </div>
 
-                <div class="info-item">
-                    <div class="info-icon">🌐</div>
-                    <div class="info-content">
-                        <h3>خدمات المطور</h3>
-                        <p>تطوير المواقع، الدعم الفني، وإضافة البيانات</p>
-                    </div>
+                <div class="form-group">
+                    <label for="message">نص الرسالة / الاقتراح</label>
+                    <textarea id="message" name="message" rows="5" placeholder="اكتب تفاصيل الرسالة هنا..." required></textarea>
                 </div>
-            </div>
 
-            <!-- استمارة مراسلة المطور -->
-            <div class="card">
-                <h2>إرسال ملاحظة أو بلاغ تقني</h2>
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">الاسم</label>
-                        <input type="text" id="name" placeholder="أدخل اسمك" required>
-                    </div>
+                <button type="submit" id="submitBtn" class="submit-btn">إرسال الرسالة</button>
+            </form>
 
-                    <div class="form-group">
-                        <label for="email">البريد الإلكتروني أو رقم الهاتف</label>
-                        <input type="text" id="email" placeholder="لكي نتمكن من الرد عليك" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="subject">نوع الرسالة</label>
-
-                        <input type="text" id="subject" placeholder="مثال: اقتراح تحسين / الإبلاغ عن خطأ / إضافة محتوى" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">الرسالة</label>
-                        <textarea id="message" rows="5" placeholder="اكتب ملاحظتك أو استفسارك هنا..." required></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn">إرسال للمطور</button>
-                </form>
-            </div>
-
+            <div id="statusMessage" class="status-message"></div>
         </div>
     </div>
 
@@ -369,7 +303,51 @@
     <button id="backToTopBtn" class="back-to-top" title="العودة للأعلى">↑</button>
 
     <script>
-        // زر العودة للأعلى
+        // 1. إعداد رابط Formspree لاستقبال الرسائل مباشرة على إيميلك
+        // استبدل الكود 'YOUR_FORMSPREE_ID' بالمعرف الخاص بك من موقع formspree.io
+        const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusMessage = document.getElementById('statusMessage');
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'جاري الإرسال...';
+            statusMessage.style.display = 'none';
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch(FORMSPREE_URL, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    statusMessage.className = 'status-message success';
+                    statusMessage.innerText = 'تم إرسال رسالتك بنجاح! شكرًا لمساهمتك.';
+                    statusMessage.style.display = 'block';
+                    contactForm.reset();
+                } else {
+                    throw new Error('فشل الإرسال');
+                }
+            } catch (error) {
+                statusMessage.className = 'status-message error';
+                statusMessage.innerText = 'حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.';
+                statusMessage.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'إرسال الرسالة';
+            }
+        });
+
+        // 2. التحكم في زر العودة للأعلى
         const backToTopBtn = document.getElementById('backToTopBtn');
 
         window.onscroll = function() {
@@ -387,11 +365,57 @@
             });
         });
 
-        // رسالة تنبيه تجريبية عند الإرسال
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+                // 1. ضع رابط API الخاص بجدول الاقتراحات في SheetDB
+        const API_URL = 'https://sheetdb.io/api/v1/mp6r63uzmuyjr';
+        
+        const contactForm = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const statusMessage = document.getElementById('statusMessage');
+        
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            alert('تم إرسال رسالتك إلى مطور الموقع بنجاح. شكراً لمساهمتك!');
-            this.reset();
+        
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'جاري الإرسال...';
+            statusMessage.style.display = 'none';
+        
+            // تجميع البيانات من النموذج
+            const formData = {
+                data: {
+                    name: document.getElementById('name').value,
+                    contact_info: document.getElementById('contact_info').value,
+                    type: document.getElementById('type').value,
+                    message: document.getElementById('message').value,
+                    date: new Date().toLocaleString('ar-DZ')
+                }
+            };
+        
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+        
+                if (response.ok) {
+                    statusMessage.className = 'status-message success';
+                    statusMessage.innerText = 'تم إرسال رسالتك بنجاح! شكرًا لمساهمتك.';
+                    statusMessage.style.display = 'block';
+                    contactForm.reset();
+                } else {
+                    throw new Error('فشل الإرسال');
+                }
+            } catch (error) {
+                statusMessage.className = 'status-message error';
+                statusMessage.innerText = 'حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.';
+                statusMessage.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'إرسال الرسالة';
+            }
         });
     </script>
 </body>
