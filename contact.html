@@ -79,7 +79,7 @@
 
         /* --- محتوى الصفحة --- */
         .container {
-            max-width: 800px; /* العرض مناسب وموحد للنماذج */
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px 15px;
         }
@@ -265,21 +265,20 @@
         </header>
 
         <div class="card">
-            <!-- استمارة الإرسال المربوطة بـ Formspree -->
             <form id="contactForm">
                 <div class="form-group">
                     <label for="name">الاسم الكامل</label>
-                    <input type="text" id="name" name="name" placeholder="أدخل اسمك الكريم" required>
+                    <input type="text" id="name" required placeholder="أدخل اسمك الكريم">
                 </div>
 
                 <div class="form-group">
                     <label for="contact_info">البريد الإلكتروني أو رقم الهاتف</label>
-                    <input type="text" id="contact_info" name="contact_info" placeholder="لتتمكن إدارة المنصة من التواصل معك" required>
+                    <input type="text" id="contact_info" required placeholder="لتتمكن إدارة المنصة من التواصل معك">
                 </div>
 
                 <div class="form-group">
                     <label for="type">نوع الرسالة</label>
-                    <select id="type" name="type" required>
+                    <select id="type" required>
                         <option value="اقتراح">اقتراح لتطوير الموقع</option>
                         <option value="بلاغ تقني">الإبلاغ عن خلل في الموقع</option>
                         <option value="إضافة محتوى">طلب إضافة معلومات أو خدمات</option>
@@ -289,7 +288,7 @@
 
                 <div class="form-group">
                     <label for="message">نص الرسالة / الاقتراح</label>
-                    <textarea id="message" name="message" rows="5" placeholder="اكتب تفاصيل الرسالة هنا..." required></textarea>
+                    <textarea id="message" rows="5" required placeholder="اكتب تفاصيل الرسالة هنا..."></textarea>
                 </div>
 
                 <button type="submit" id="submitBtn" class="submit-btn">إرسال الرسالة</button>
@@ -303,9 +302,8 @@
     <button id="backToTopBtn" class="back-to-top" title="العودة للأعلى">↑</button>
 
     <script>
-        // 1. إعداد رابط Formspree لاستقبال الرسائل مباشرة على إيميلك
-        // استبدل الكود 'YOUR_FORMSPREE_ID' بالمعرف الخاص بك من موقع formspree.io
-        const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORMSPREE_ID';
+        // ضع رابط SheetDB الخاص بجدول الاقتراحات هنا
+        const API_URL = 'https://sheetdb.io/api/v1/mp6r63uzmuyjr';
 
         const contactForm = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
@@ -318,15 +316,23 @@
             submitBtn.innerText = 'جاري الإرسال...';
             statusMessage.style.display = 'none';
 
-            const formData = new FormData(contactForm);
+            const payload = {
+                data: [{
+                    'name': document.getElementById('name').value,
+                    'contact_info': document.getElementById('contact_info').value,
+                    'type': document.getElementById('type').value,
+                    'message': document.getElementById('message').value
+                }]
+            };
 
             try {
-                const response = await fetch(FORMSPREE_URL, {
+                const response = await fetch(API_URL, {
                     method: 'POST',
-                    body: formData,
                     headers: {
-                        'Accept': 'application/json'
-                    }
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
                 });
 
                 if (response.ok) {
@@ -347,7 +353,7 @@
             }
         });
 
-        // 2. التحكم في زر العودة للأعلى
+        // التحكم في زر العودة للأعلى
         const backToTopBtn = document.getElementById('backToTopBtn');
 
         window.onscroll = function() {
@@ -363,59 +369,6 @@
                 top: 0,
                 behavior: 'smooth'
             });
-        });
-
-                // 1. ضع رابط API الخاص بجدول الاقتراحات في SheetDB
-        const API_URL = 'https://sheetdb.io/api/v1/mp6r63uzmuyjr';
-        
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const statusMessage = document.getElementById('statusMessage');
-        
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-        
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'جاري الإرسال...';
-            statusMessage.style.display = 'none';
-        
-            // تجميع البيانات من النموذج
-            const formData = {
-                data: {
-                    name: document.getElementById('name').value,
-                    contact_info: document.getElementById('contact_info').value,
-                    type: document.getElementById('type').value,
-                    message: document.getElementById('message').value,
-                    date: new Date().toLocaleString('ar-DZ')
-                }
-            };
-        
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-        
-                if (response.ok) {
-                    statusMessage.className = 'status-message success';
-                    statusMessage.innerText = 'تم إرسال رسالتك بنجاح! شكرًا لمساهمتك.';
-                    statusMessage.style.display = 'block';
-                    contactForm.reset();
-                } else {
-                    throw new Error('فشل الإرسال');
-                }
-            } catch (error) {
-                statusMessage.className = 'status-message error';
-                statusMessage.innerText = 'حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقاً.';
-                statusMessage.style.display = 'block';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'إرسال الرسالة';
-            }
         });
     </script>
 </body>
