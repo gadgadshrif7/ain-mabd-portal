@@ -31,14 +31,14 @@
             padding-top: 80px; /* مساحة فارغة حتى لا يغطي شريط التنقل على المحتوى */
         }
 
-        /* --- شريط التنقل العلوي (Navbar) --- */
+        /* --- شريط التنقل العلوي البسيط (Navbar) --- */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
             z-index: 1000;
         }
 
@@ -61,7 +61,7 @@
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 20px;
+            gap: 25px;
         }
 
         .nav-links a {
@@ -224,26 +224,14 @@
 </head>
 <body>
 
-    <!-- شريط التنقل العلوي -->
+    <!-- شريط التنقل العلوي البسيط -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">عين معبد</a>
             <ul class="nav-links">
                 <li><a href="index.html">الرئيسية</a></li>
-                <li><a href="news.html">الأخبار</a></li>
-                
-                <!-- قسم الخدمات مع القائمة المنسدلة -->
-                <li class="dropdown">
-                    <a href="services.html" class="dropdown-toggle active">الخدمات ▾</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="health.html">الصحة والمناوبات</a></li>
-                        <li><a href="mosques.html">المساجد والدور الدينية</a></li>
-                        <li><a href="documents.html">دليل الوثائق الإدارية</a></li>
-                        <li><a href="trades.html">دليل الحرفيين والتجارة</a></li>
-                        <li><a href="history.html">معالم وتاريخ عين معبد</a></li>
-                    </ul>
-                </li>
-    
+                <li><a href="news.html" class="active">الأخبار</a></li>
+                <li><a href="services.html">الخدمات</a></li>
                 <li><a href="contact.html">اتصل بنا</a></li>
             </ul>
         </div>
@@ -264,7 +252,6 @@
     <button id="backToTopBtn" class="back-to-top" title="العودة للأعلى">↑</button>
 
     <script>
-        // ضع رابط SheetDB الخاص بك هنا
         const API_URL = 'https://sheetdb.io/api/v1/fju62pmutif0z';
 
         // 1. جلب الأخبار من Google Sheets
