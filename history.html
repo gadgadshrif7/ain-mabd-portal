@@ -134,7 +134,7 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
         }
 
@@ -152,15 +152,17 @@
             box-shadow: var(--shadow-md);
         }
 
-        .photo-wrapper {
-            width: 100%;
+        /* شبكة الصور المتعددة داخل البطاقة */
+        .multi-photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2px;
+            background: var(--border-color);
             height: 230px;
             overflow: hidden;
-            background: #e2e8f0;
-            position: relative;
         }
 
-        .photo-wrapper img {
+        .multi-photo-grid img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -168,8 +170,23 @@
             transition: transform 0.4s ease;
         }
 
-        .photo-card:hover .photo-wrapper img {
-            transform: scale(1.05);
+        .multi-photo-grid img:hover {
+            transform: scale(1.08);
+            z-index: 2;
+        }
+
+        /* إذا كانت الصورة واحدة فقط في البطاقة */
+        .single-photo {
+            width: 100%;
+            height: 230px;
+            overflow: hidden;
+        }
+
+        .single-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .photo-title {
@@ -204,7 +221,7 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 1.7rem; }
             .gallery-grid { grid-template-columns: 1fr; }
-            .photo-wrapper { height: 210px; }
+            .multi-photo-grid, .single-photo { height: 200px; }
         }
     </style>
 </head>
@@ -232,64 +249,37 @@
         
         <div class="gallery-grid">
 
-            <!-- 1. جبل حواس -->
+            <!-- 1. جبل حواس (بطاقة تحتوي على 4 صور) -->
             <div class="photo-card">
-                <div class="photo-wrapper">
-                    <!-- ضع رابط صورتك المباشر مكان الرابط المكتوب في src -->
-                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b" alt="جبل حواس">
+                <div class="multi-photo-grid">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b" alt="صورة 1">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="صورة 2">
+                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" alt="صورة 3">
+                    <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff" alt="صورة 4">
                 </div>
                 <div class="photo-title">
                     <i class="fa-solid fa-mountain"></i> جبل حواس
                 </div>
             </div>
 
-            <!-- 2. قعدة حواس -->
+            <!-- 2. قعدة حواس (بطاقة تحتوي على صورتين) -->
             <div class="photo-card">
-                <div class="photo-wrapper">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="قعدة حواس">
+                <div class="multi-photo-grid">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="صورة 1">
+                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef" alt="صورة 2">
                 </div>
                 <div class="photo-title">
                     <i class="fa-solid fa-tree"></i> قعدة حواس
                 </div>
             </div>
 
-            <!-- 3. منبع عين معبد -->
+            <!-- 3. منبع عين معبد (بطاقة تحتوي على صورة واحدة فقط) -->
             <div class="photo-card">
-                <div class="photo-wrapper">
+                <div class="single-photo">
                     <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" alt="منبع عين معبد">
                 </div>
                 <div class="photo-title">
                     <i class="fa-solid fa-droplet"></i> منبع عين معبد
-                </div>
-            </div>
-
-            <!-- 4. المناظر الطبيعية -->
-            <div class="photo-card">
-                <div class="photo-wrapper">
-                    <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff" alt="المناظر الطبيعية">
-                </div>
-                <div class="photo-title">
-                    <i class="fa-solid fa-image"></i> المناظر الطبيعية
-                </div>
-            </div>
-
-            <!-- 5. السهول والمراعي -->
-            <div class="photo-card">
-                <div class="photo-wrapper">
-                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef" alt="السهول والمراعي">
-                </div>
-                <div class="photo-title">
-                    <i class="fa-solid fa-wheat-awn"></i> السهول والمراعي
-                </div>
-            </div>
-
-            <!-- 6. وسط البلدية -->
-            <div class="photo-card">
-                <div class="photo-wrapper">
-                    <img src="https://images.unsplash.com/photo-1477959858617-67f30ac4ce78" alt="وسط البلدية">
-                </div>
-                <div class="photo-title">
-                    <i class="fa-solid fa-city"></i> وسط البلدية
                 </div>
             </div>
 
