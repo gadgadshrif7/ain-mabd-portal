@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>معالم وتاريخ عين معبد | بوابة عين معبد الرقمية</title>
-    <meta name="description" content="تعرف على تاريخ بلدية عين معبد ولاية الجلفة، جبل حواس، قعدة حواس، والمناظر الطبيعية والتراثية بالمنطقة.">
-    <meta name="keywords" content="عين معبد, تاريخ عين معبد, جبل حواس, قعدة حواس, معالم عين معبد, الجلفة, السياحة في الجلفة">
+    <meta name="description" content="صور ومعالم عين معبد ولاية الجلفة، جبل حواس، قعدة حواس، والمناظر الطبيعية والتراثية بالمنطقة.">
+    <meta name="keywords" content="عين معبد, صور عين معبد, جبل حواس, قعدة حواس, معالم عين معبد, الجلفة">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://ainmaabedport.onrender.com/history.html">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
     <meta property="og:title" content="معالم وتاريخ عين معبد | بوابة عين معبد الرقمية">
-    <meta property="og:description" content="نبذة تاريخية وسياحية عن بلدية عين معبد ومعالمها الطبيعية مثل جبل حواس وقعدة حواس.">
+    <meta property="og:description" content="ألبوم صور معالم بلدية عين معبد الطبيعية والتاريخية.">
     <meta property="og:site_name" content="بوابة عين معبد الرقمية">
 
     <!-- أيقونة الموقع -->
@@ -28,7 +28,6 @@
     <style>
         :root {
             --primary: #059669;
-            --primary-dark: #047857;
             --accent: #d97706;
             --bg-body: #f8fafc;
             --bg-card: #ffffff;
@@ -62,7 +61,7 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
         /* Navbar */
@@ -111,81 +110,84 @@
         .hero {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #059669 100%);
             color: #fff;
-            padding: 50px 20px;
+            padding: 45px 20px;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 2.2rem;
+            font-size: 2.1rem;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .hero p {
             color: #cbd5e1;
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto;
+            font-size: 1rem;
         }
 
-        /* Container & Content */
+        /* Container & Grid */
         .container {
-            max-width: 1000px;
+            max-width: 1140px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        .content-section {
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .photo-card {
             background: var(--bg-card);
             border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
+            overflow: hidden;
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-sm);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .section-title {
-            font-size: 1.4rem;
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .photo-wrapper {
+            width: 100%;
+            height: 230px;
+            overflow: hidden;
+            background: #e2e8f0;
+            position: relative;
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .photo-card:hover .photo-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .photo-title {
+            padding: 18px 20px;
+            text-align: center;
+            font-size: 1.15rem;
             font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
-        }
-
-        .landmark-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .landmark-card {
-            background: var(--bg-body);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .landmark-card h4 {
-            font-size: 1.1rem;
             color: var(--text-main);
-            margin-bottom: 8px;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
+            border-top: 1px solid var(--border-color);
         }
 
-        .landmark-card h4 i {
+        .photo-title i {
             color: var(--accent);
-        }
-
-        .landmark-card p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
+            font-size: 1.1rem;
         }
 
         /* Footer */
@@ -195,12 +197,14 @@
             padding: 30px 20px;
             text-align: center;
             font-size: 0.9rem;
+            margin-top: 50px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 1.7rem; }
-            .container { margin: 20px auto; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .photo-wrapper { height: 210px; }
         }
     </style>
 </head>
@@ -210,7 +214,7 @@
     <nav class="navbar">
         <div class="navbar-container">
             <a href="index.html" class="navbar-brand">
-                </i> بوابة عين معبد الرقمية
+                <i class="fa-solid fa-mountain-sun"></i> بوابة عين معبد الرقمية
             </a>
             <a href="index.html" class="back-btn">
                 <i class="fa-solid fa-arrow-right"></i> العودة للرئيسية
@@ -220,51 +224,76 @@
 
     <!-- الهيدر الرئيسي -->
     <header class="hero">
-        <h1>تاريخ ومعالم عين معبد</h1>
-        <p>أصالة التاريخ، جمال الطبيعة العذراء، والموقع الاستراتيجي في قلب ولاية الجلفة</p>
+        <h1>معالم وصور عين معبد</h1>
+        <p>معرض الصور لأجمل المعالم والمناظر الطبيعية ببلدية عين معبد</p>
     </header>
 
     <div class="container">
+        
+        <div class="gallery-grid">
 
-        <!-- نبذة تاريخية -->
-        <section class="content-section">
-            <h2 class="section-title">
-                <i class="fa-solid fa-book-open"></i> نبذة عن البلدية
-            </h2>
-            <p>
-                تعد <strong>بلدية عين معبد</strong> إحدى البلديات العريقة والتابعة لولاية الجلفة. تتميز بموقعها الجغرافي الاستراتيجي الذي يربط بين عدة مناطق بالولاية، بالإضافة إلى طابعها الرعوي والسباسبي المميز. سميت بهذا الاسم نسبة إلى منبع المياه العذبة الشهير في المنطقة، وتزخر بتاريخ حافل ومحطات نضالية تاريخية مجيدة خلال الثورة التحريرية المظفرة.
-            </p>
-        </section>
-
-        <!-- أهم المعالم الطبيعية والتاريخية -->
-        <section class="content-section">
-            <h2 class="section-title">
-                <i class="fa-solid fa-map-location-dot"></i> أبرز المعالم والمواقع
-            </h2>
-            <div class="landmark-grid">
-                
-                <div class="landmark-card">
-                    <h4><i class="fa-solid fa-mountain"></i> جبل حواس</h4>
-                    <p>يعتبر من أشهر المعالم الطبيعية والتاريخية بالمنطقة، يطل على البلدية ويشكل لوحة طبيعية خلابة، وكان ملجأً وموقعاً استراتيجياً للمجاهدين أثناء ثورة التحرير.</p>
+            <!-- 1. جبل حواس -->
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <!-- استبدل الرابط أدناه بمسار الصورة الخاصة بك -->
+                    <img src="images/jebel-hawas.jpg" alt="جبل حواس" onerror="this.src='https://via.placeholder.com/600x400?text=جبل+حواس'">
                 </div>
-
-                <div class="landmark-card">
-                    <h4><i class="fa-solid fa-tree"></i> قعدة حواس</h4>
-                    <p>منطقة طبيعية ذات مناظر جبلية عذراء وقعدة صخرية ساحرة تستقطب محبي السياحة الجبلية والتخييم والهدوء للاستمتاع بهواء المنطقة العليل.</p>
+                <div class="photo-title">
+                    <i class="fa-solid fa-mountain"></i> جبل حواس
                 </div>
-
-                <div class="landmark-card">
-                    <h4><i class="fa-solid fa-droplet"></i> عين ماء "عين معبد"</h4>
-                    <p>المنبع المائي التاريخي الذي سميت عليه البلدية، وكان يمثل قطب تجمع واستقرار العائلات والرحالة عبر التاريخ لت وفر المياه العذبة.</p>
-                </div>
-
-                <div class="landmark-card">
-                    <h4><i class="fa-solid fa-wheat-awn"></i> الطابع الفلاحي والرعوي</h4>
-                    <p>تتميز عين معبد بسهولها ومراعيها التي تجعل منها منطقة متميزة في تربية المواشي وإنتاج المواد الفلاحية ذات الجودة العالية.</p>
-                </div>
-
             </div>
-        </section>
+
+            <!-- 2. قعدة حواس -->
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="images/gaadat-hawas.jpg" alt="قعدة حواس" onerror="this.src='https://via.placeholder.com/600x400?text=قعدة+حواس'">
+                </div>
+                <div class="photo-title">
+                    <i class="fa-solid fa-tree"></i> قعدة حواس
+                </div>
+            </div>
+
+            <!-- 3. منبع عين معبد -->
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="images/ain-water.jpg" alt="منبع عين معبد" onerror="this.src='https://via.placeholder.com/600x400?text=منبع+عين+معبد'">
+                </div>
+                <div class="photo-title">
+                    <i class="fa-solid fa-droplet"></i> منبع عين معبد
+                </div>
+            </div>
+
+            <!-- 4. المناظر الطبيعية الجبلية -->
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="images/nature.jpg" alt="المناظر الطبيعية والجبلية" onerror="this.src='https://via.placeholder.com/600x400?text=المناظر+الطبيعية'">
+                </div>
+                <div class="photo-title">
+                    <i class="fa-solid fa-image"></i> المناظر الطبيعية
+                </div>
+            </div>
+
+            <!-- 5. السهول والمراعي -->
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="images/pastures.jpg" alt="السهول والمراعي" onerror="this.src='https://via.placeholder.com/600x400?text=السهول+ والمراعي'">
+                </div>
+                <div class="photo-title">
+                    <i class="fa-solid fa-wheat-awn"></i> السهول والمراعي
+                </div>
+            </div>
+
+            <!-- 6. وسط المدينة -->
+            <div class="photo-card">
+                <div class="photo-wrapper">
+                    <img src="images/city-center.jpg" alt="وسط البلدية" onerror="this.src='https://via.placeholder.com/600x400?text=وسط+البلدية'">
+                </div>
+                <div class="photo-title">
+                    <i class="fa-solid fa-city"></i> وسط البلدية
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
