@@ -24,6 +24,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- مكتبة Lightbox لعرض الصور بحجم أكبر عند الضغط عليها -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
 
     <style>
         :root {
@@ -162,7 +165,15 @@
             overflow: hidden;
         }
 
-        .multi-photo-grid img {
+        .multi-photo-grid a, .single-photo a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .multi-photo-grid img, .single-photo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -170,9 +181,8 @@
             transition: transform 0.4s ease;
         }
 
-        .multi-photo-grid img:hover {
+        .multi-photo-grid a:hover img, .single-photo a:hover img {
             transform: scale(1.08);
-            z-index: 2;
         }
 
         /* إذا كانت الصورة واحدة فقط في البطاقة */
@@ -180,13 +190,6 @@
             width: 100%;
             height: 230px;
             overflow: hidden;
-        }
-
-        .single-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
         }
 
         .photo-title {
@@ -242,41 +245,55 @@
     <!-- الهيدر الرئيسي -->
     <header class="hero">
         <h1>معالم وصور عين معبد</h1>
-        <p>معرض الصور لأجمل المعالم والمناظر الطبيعية ببلدية عين معبد</p>
+        <p>اضغط على أي صورة لفتحها وتكبيرها بحجم كامل</p>
     </header>
 
     <div class="container">
         
         <div class="gallery-grid">
 
-            <!-- 1. جبل حجر الملح (بطاقة تحتوي على 4 صور) -->
+            <!-- 1. جبل حجر الملح (بطاقة عدة صور مع التكبير) -->
             <div class="photo-card">
                 <div class="multi-photo-grid">
-                    <img src="https://i.ibb.co/Lzxp6kJH/1.png" alt="صورة 1">
-                    <img src="https://i.ibb.co/Lzxp6kJH/1.png" alt="صورة 2">
-                    <img src="https://i.ibb.co/qL32NcXL/3.png" alt="صورة 3">
-                    <img src="https://i.ibb.co/7dXPZTGS/4.png" alt="صورة 4">
+                    <a href="https://i.ibb.co/Lzxp6kJH/1.png" data-lightbox="hawas" data-title="جبل حجر الملح - عين معبد">
+                        <img src="https://i.ibb.co/Lzxp6kJH/1.png" alt="صورة 1">
+                    </a>
+                    <a href="https://i.ibb.co/v4wQYSn7/2.png" data-lightbox="hawas" data-title="جبل حجر الملح - عين معبد">
+                        <img src="https://i.ibb.co/v4wQYSn7/2.png" alt="صورة 2">
+                    </a>
+                    <a href="https://i.ibb.co/qL32NcXL/3.png" data-lightbox="hawas" data-title="جبل حجر الملح - عين معبد">
+                        <img src="https://i.ibb.co/qL32NcXL/3.png" alt="صورة 3">
+                    </a>
+                    <a href="https://i.ibb.co/7dXPZTGS/4.png" data-lightbox="hawas" data-title="جبل حجر الملح - عين معبد">
+                        <img src="https://i.ibb.co/7dXPZTGS/4.png" alt="صورة 4">
+                    </a>
                 </div>
                 <div class="photo-title">
                     <i class="fa-solid fa-mountain"></i> جبل حجر الملح
                 </div>
             </div>
 
-            <!-- 2. قعدة حواس (بطاقة تحتوي على صورتين) -->
+            <!-- 2. قعدة حواس -->
             <div class="photo-card">
                 <div class="multi-photo-grid">
-                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="صورة 1">
-                    <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef" alt="صورة 2">
+                    <a href="https://images.unsplash.com/photo-1506744038136-46273834b3fb" data-lightbox="gaada" data-title="قعدة حواس - عين معبد">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="صورة 1">
+                    </a>
+                    <a href="https://images.unsplash.com/photo-1500382017468-9049fed747ef" data-lightbox="gaada" data-title="قعدة حواس - عين معبد">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef" alt="صورة 2">
+                    </a>
                 </div>
                 <div class="photo-title">
                     <i class="fa-solid fa-tree"></i> قعدة حواس
                 </div>
             </div>
 
-            <!-- 3. منبع عين معبد (بطاقة تحتوي على صورة واحدة فقط) -->
+            <!-- 3. منبع عين معبد (صورة واحدة متكبرة) -->
             <div class="photo-card">
                 <div class="single-photo">
-                    <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" alt="منبع عين معبد">
+                    <a href="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" data-lightbox="water" data-title="منبع عين معبد">
+                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" alt="منبع عين معبد">
+                    </a>
                 </div>
                 <div class="photo-title">
                     <i class="fa-solid fa-droplet"></i> منبع عين معبد
@@ -291,6 +308,10 @@
     <footer>
         <p>جميع الحقوق محفوظة &copy; 2026 <strong>بوابة عين معبد الرقمية</strong></p>
     </footer>
+
+    <!-- ملفات JavaScript الخاصة بمكتبة التكبير Lightbox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
 
 </body>
 </html>
