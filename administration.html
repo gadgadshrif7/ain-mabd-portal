@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الإدارة والمؤسسات العمومية | عين معبد</title>
-    <meta name="description" content="دليل المؤسسات الإدارية والعمومية ببلدية عين معبد: مقر البلدية، الحالة المدنية، أوقات العمل، وبريد الجزائر.">
-    <meta name="keywords" content="بلدية عين معبد, بريد الجزائر عين معبد, الوثائق الإدارية, الحالة المدنية الجلفة">
+    <title>الإدارة والمؤسسات العمومية | بوابة عين معبد الرقمية</title>
+    <meta name="description" content="دليل المؤسسات الإدارية والعمومية ببلدية عين معبد: مقر البلدية، الحالة المدنية، أوقات العمل، وبريد الجزائر، والملفات المطلوبة للوثائق الإدارية.">
+    <meta name="keywords" content="بلدية عين معبد, بريد الجزائر عين معبد, الوثائق الإدارية, الحالة المدنية الجلفة, ملف CCP, عقد الزواج">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://ain-maabed.github.io/administration.html">
 
@@ -16,7 +16,7 @@
     <meta property="og:url" content="https://ain-maabed.github.io/administration.html">
     <meta property="og:locale" content="ar_DZ">
 
-    <!-- Schema.org -->
+    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
     [
       {
@@ -46,11 +46,11 @@
     ]
     </script>
 
-    <!-- الأيقونة المتوافقة تماماً مع معايير Google Search -->
+    <!-- الأيقونة المتوافقة مع معايير Google Search -->
     <link rel="icon" type="image/png" sizes="96x96" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     
-    <!-- خط Tajawal العالي الجودة -->
+    <!-- خط Tajawal -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -183,7 +183,7 @@
             margin-bottom: 30px;
         }
 
-        /* تصميم كارت خاص ببريد الجزائر مميز بالهوية الإدارية */
+        /* تصميم كارت خاص ببريد الجزائر */
         .section-card.post-card {
             border-top: 5px solid var(--post-yellow);
             background: linear-gradient(to bottom, #ffffff, #fffdf5);
@@ -254,27 +254,106 @@
             color: #ffffff;
         }
 
-        .docs-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        /* تصميم بطاقات الأكورديون (Accordion) التفاعلية للوثائق */
+        .accordion-container {
+            display: flex;
+            flex-direction: column;
             gap: 15px;
+            margin-top: 15px;
         }
 
-        .doc-item {
-            background: #f8fafc;
-            padding: 15px;
-            border-radius: 10px;
+        .doc-card {
+            background: var(--bg-card);
             border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .doc-card:hover {
+            border-color: var(--primary);
+        }
+
+        .doc-header {
+            width: 100%;
+            padding: 18px 20px;
+            background: transparent;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            text-align: right;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .doc-header-title {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-weight: 600;
         }
 
-        .doc-item i {
+        .doc-header-title i {
             color: var(--primary);
-            font-size: 1.2rem;
+            font-size: 1.15rem;
+        }
+
+        .toggle-icon {
+            color: var(--text-muted);
+            transition: transform 0.3s ease;
+        }
+
+        .doc-card.active .toggle-icon {
+            transform: rotate(180deg);
+            color: var(--primary);
+        }
+
+        .doc-card.active .doc-header {
+            background: #f0f9ff;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .doc-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out;
+            background: var(--bg-card);
+        }
+
+        .doc-card.active .doc-content {
+            max-height: 1000px;
+            transition: max-height 0.5s ease-in;
+        }
+
+        .doc-list {
+            padding: 20px 25px;
+            list-style: none;
+        }
+
+        .doc-list li {
+            position: relative;
+            padding-right: 26px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .doc-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .doc-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            top: 2px;
+            color: var(--primary);
+            font-size: 0.85rem;
         }
 
         /* الفوتر */
@@ -289,6 +368,8 @@
         @media (max-width: 600px) {
             .top-call-bar { flex-direction: column; gap: 8px; font-size: 0.88rem; }
             header h1 { font-size: 1.7rem; }
+            .doc-header { font-size: 0.98rem; padding: 15px; }
+            .doc-list { padding: 15px 18px; }
         }
     </style>
 </head>
@@ -349,19 +430,6 @@
             </div>
         </div>
 
-        <!-- قسم البلدية والوثائق -->
-        <div class="section-card">
-            <h2><i class="fa-solid fa-file-contract"></i> البلدية والحالة المدنية</h2>
-            <ul class="docs-list">
-                <li class="doc-item"><i class="fa-solid fa-certificate"></i> بطاقة التعريف الوطنية</li>
-                <li class="doc-item"><i class="fa-solid fa-passport"></i> جواز السفر البيومتري</li>
-                <li class="doc-item"><i class="fa-solid fa-file-invoice"></i> شهادة الميلاد (12 خ)</li>
-                <li class="doc-item"><i class="fa-solid fa-house"></i> شهادة الإقامة</li>
-                <li class="doc-item"><i class="fa-solid fa-ring"></i> عقد الزواج والدفتر العائلي</li>
-                <li class="doc-item"><i class="fa-solid fa-id-card"></i> رخصة السياقة</li>
-            </ul>
-        </div>
-
         <!-- قسم أوقات استقبال البلدية -->
         <div class="section-card">
             <h2><i class="fa-solid fa-building-user"></i> أوقات استقبال البلدية</h2>
@@ -371,11 +439,139 @@
             <p><strong>من الأحد إلى الخميس:</strong> 08:00 صباحاً — 16:30 مساءً</p>
         </div>
 
+        <!-- قسم دليل الوثائق والملفات الإدارية (بطاقات أكورديون تفاعلية) -->
+        <div class="section-card">
+            <h2><i class="fa-solid fa-file-contract"></i> دليل الوثائق والملفات الإدارية</h2>
+            <p style="color: var(--text-muted); margin-bottom: 15px;">اضغط على الوثيقة لعرض قائمة الأوراق والملف المطلوب استخراجه:</p>
+
+            <div class="accordion-container">
+
+                <!-- 1. بطاقة التعريف البيومترية -->
+                <div class="doc-card">
+                    <button class="doc-header" onclick="toggleCard(this)">
+                        <span class="doc-header-title">
+                            <i class="fa-solid fa-address-card"></i>
+                            بطاقة التعريف الوطنية البيومترية
+                        </span>
+                        <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="doc-content">
+                        <ul class="doc-list">
+                            <li>شهادة الميلاد رقم 12-خ (خاصة).</li>
+                            <li>شهادة الجنسية الجزائرية (في حال عدم حيازة جواز سفر بيومتري سابق).</li>
+                            <li>شهادة الإقامة سارية المفعول (أقل من 3 أشهر).</li>
+                            <li>بطاقة فصيلة الدم (Groupe Sanguin).</li>
+                            <li>صورتان (2) شمسيتان بيومتريتان حديثتان.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 2. جواز السفر البيومتري -->
+                <div class="doc-card">
+                    <button class="doc-header" onclick="toggleCard(this)">
+                        <span class="doc-header-title">
+                            <i class="fa-solid fa-passport"></i>
+                            جواز السفر البيومتري
+                        </span>
+                        <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="doc-content">
+                        <ul class="doc-list">
+                            <li>استمارة الطلب (تُملأ عبر موقع وزارة الداخلية أو بالبلدية).</li>
+                            <li>بطاقة التعريف الوطنية البيومترية (نسخة + الأصل).</li>
+                            <li>شهادة الميلاد رقم 12-خ.</li>
+                            <li>شهادة الإقامة (أقل من 3 أشهر).</li>
+                            <li>بطاقة فصيلة الدم.</li>
+                            <li>صورتان (2) شمسيتان بيومتريتان.</li>
+                            <li>قسيمة الطابع الجبائي الخاص بجواز السفر.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 3. فتح حساب بريدي جاري CCP -->
+                <div class="doc-card">
+                    <button class="doc-header" onclick="toggleCard(this)">
+                        <span class="doc-header-title">
+                            <i class="fa-solid fa-money-check-dollar"></i>
+                            فتح حساب بريدي جاري (CCP)
+                        </span>
+                        <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="doc-content">
+                        <ul class="doc-list">
+                            <li>استمارة طلب فتح حساب (تُستخرج وتُملأ بمكتب البريد).</li>
+                            <li>نسخة من بطاقة التعريف الوطنية البيومترية (مع تقديم الأصل للمعاينة).</li>
+                            <li>شهادة الإقامة سارية المفعول.</li>
+                            <li>شهادة عمل (للموظفين)، أو شهادة مدرسية/جامعية (للطلبة)، أو إثبات دخل/منحة.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 4. عقد الزواج والدفتر العائلي -->
+                <div class="doc-card">
+                    <button class="doc-header" onclick="toggleCard(this)">
+                        <span class="doc-header-title">
+                            <i class="fa-solid fa-ring"></i>
+                            عقد الزواج والدفتر العائلي
+                        </span>
+                        <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="doc-content">
+                        <ul class="doc-list">
+                            <li>شهادة الميلاد رقم 12 لكل من الزوج والزوجة (مخصصة للزواج).</li>
+                            <li>شهادة إقامة أحد الزوجين.</li>
+                            <li>الشهادة الطبية المسبقة للزواج لكلا الزوجين (أقل من 3 أشهر).</li>
+                            <li>بطاقة التعريف الوطنية للزوجين وشاهدين اثنين.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 5. طلب السكن العمومي الإيجاري (الاجتماعي) -->
+                <div class="doc-card">
+                    <button class="doc-header" onclick="toggleCard(this)">
+                        <span class="doc-header-title">
+                            <i class="fa-solid fa-house-chimney"></i>
+                            طلب السكن العمومي الإيجاري (الاجتماعي)
+                        </span>
+                        <i class="fa-solid fa-chevron-down toggle-icon"></i>
+                    </button>
+                    <div class="doc-content">
+                        <ul class="doc-list">
+                            <li>استمارة طلب السكن الرسمية (تُملأ وتُصادق عليها).</li>
+                            <li>شهادة الميلاد رقم 12 للمترشح وزوجه.</li>
+                            <li>شهادة العائلية (Fiche Familiale) للمتزوجين، أو شهادة العزوبية/الطلاق/الترمل.</li>
+                            <li>شهادة الإقامة (تثبت الإقامة بالبلدية لمدة لا تقل عن 5 سنوات).</li>
+                            <li>كشف الراتب للشهر الأخير، أو شهادة عدم العمل/الدخل المنخفض.</li>
+                            <li>شهادة عدم الخضوع للضريبة (C20) للمترشح وزوجه.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
+    <!-- الفوتر -->
     <footer>
         <p>بوابة عين معبد الرقمية &copy; 2026 — مصلحة الإعلام والتوثيق</p>
     </footer>
 
+    <!-- سكربت تفاعل البطاقات -->
+    <script>
+        function toggleCard(button) {
+            const card = button.parentElement;
+            
+            // إغلاق أي بطاقة أخرى مفتوحة مسبقاً
+            document.querySelectorAll('.doc-card').forEach(item => {
+                if (item !== card) {
+                    item.classList.remove('active');
+                }
+            });
+
+            // تبديل حالة البطاقة الحالية (فتح / إغلاق)
+            card.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
